@@ -42,8 +42,8 @@ public class LoginActivity extends AppCompatActivity{
                 editor.putString("loginUser", u);
                 editor.putString("loginPassword", p);
                 editor.commit();
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                Intent intent1 = new Intent(this, MainActivity.class);
+                startActivity(intent1);
             }
         } else {
             Toast.makeText(this, "No data", Toast.LENGTH_LONG).show();

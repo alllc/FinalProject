@@ -27,7 +27,7 @@ public class ExpenseActivity extends AppCompatActivity {
     }
     //button click to open input page
     public void inputPage(View view){
-        Intent intent = new Intent(this, ExpenseActivity.class);
+        Intent intent = new Intent(this, InputActivity.class);
         startActivity(intent);
     }
     //button click to open result page

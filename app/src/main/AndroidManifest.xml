@@ -15,6 +15,22 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".DetailActivity"
+            android:label="@string/detail_page">
+        </activity>
+        <activity
+            android:name=".ExpenseActivity"
+            android:label="@string/expense_page">
+        </activity>
+        <activity
+            android:name=".IncomeActivity"
+            android:label="@string/income_page">
+        </activity>
+        <activity
+            android:name=".InputActivity"
+            android:label="@string/input_page">
+        </activity>
+        <activity
             android:name=".LoginActivity"
             android:label="@string/log_in_page">
         </activity>
@@ -23,9 +39,10 @@
             android:label="@string/register_page">
         </activity>
         <activity
-            android:name=".DetailActivity"
-            android:label="@string/register_page">
+            android:name=".SettingActivity"
+            android:label="@string/setting_page">
         </activity>
+
     </application>
 
 </manifest>

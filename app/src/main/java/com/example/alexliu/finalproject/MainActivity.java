@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
         String loginUser = sharedPrefs.getString("loginUser", DEFAULT);
         String loginPassword = sharedPrefs.getString("loginPassword", DEFAULT);
         //check if there is a data
-        Toast.makeText(this,"loading to log in page",Toast.LENGTH_LONG).show();
-//        if(!loginUser.equals(DEFAULT) && !loginPassword.equals(DEFAULT)){
+//        Toast.makeText(this,"loading to log in page",Toast.LENGTH_LONG).show();
+//        if(loginUser.equals(DEFAULT) && loginPassword.equals(DEFAULT)){
 //            Toast.makeText(this,"No user log in, loading to log in page",Toast.LENGTH_LONG).show();
 //            Intent intent = new Intent(this, LoginActivity.class);
 //            startActivity(intent);
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
     //button click to open input page
     public void inputPage(View view){
-        Intent intent = new Intent(this, ExpenseActivity.class);
+        Intent intent = new Intent(this, InputActivity.class);
         startActivity(intent);
     }
     //button click to open result page
