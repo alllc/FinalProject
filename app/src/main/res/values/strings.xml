@@ -2,5 +2,10 @@
     <string name="app_name">FinalProject</string>
     <string name="log_in_page">Log In Page</string>
     <string name="register_page">Sign Up</string>
-
+    <string name="input_page">Input</string>
+    <string name="detail_page">Detail</string>
+    <string name="result_page">Result</string>
+    <string name="setting_page">Setting</string>
+    <string name="income_page">Income</string>
+    <string name="expense_page">Expense</string>
 </resources>
