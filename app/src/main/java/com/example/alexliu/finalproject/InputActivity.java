@@ -4,17 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
  * Created by alexliu on 16-07-01.
  */
 public class InputActivity extends AppCompatActivity {
-    EditText  moneyName,  moneyAmt, moneyDate, selectType;
+    EditText  moneyName,  moneyAmt, moneyDate;
+    TextView textView;
     Spinner moneyInput,moneyType;
+    String mInput,mType;
     MyDataBase db;
+//    String[] m={"Income","Expense"};
+//    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,19 +33,52 @@ public class InputActivity extends AppCompatActivity {
         moneyType = (Spinner)findViewById(R.id.typeSpinner);
         moneyAmt = (EditText)findViewById(R.id.amountEditTxt);
         moneyDate = (EditText)findViewById(R.id.dateEditTxt);
-
+        textView = (TextView)findViewById(R.id.textView6);
         db = new MyDataBase(this);
+        moneyInput.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                String[] m = getResources().getStringArray(
+                        R.array.input_type);
+                mInput = m[position];
+                textView.setText("The type u choice is：" + m[position]);//显示
+
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+//        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,m);
+//
+//        //dropdown style
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//
+//        //add adapter to spinner
+//        moneyInput.setAdapter(adapter);
+//
+//        //adding listener
+//        moneyInput.setOnItemSelectedListener(new moneyInputListener());
 
     }
+
+//        class moneyInputListener implements AdapterView.OnItemSelectedListener{
+//
+//            public void onItemSelected(AdapterView<?> arg0,View arg1, int arg2, long arg3){
+//
+//            }
+//
+//        }
     public void submitButton (View view)
     {
-      //  String input = moneyInput.
+        String input = mInput;
         String name = moneyName.getText().toString();
-      //  String type = moneyType.getText().toString();
+        String type = "null";
         String amount = moneyAmt.getText().toString();
         String date = moneyDate.getText().toString();
-        Toast.makeText(this, name + type + amount + date, Toast.LENGTH_SHORT).show();
-        long id = db.insertData(name, type, amount, date);
+        Toast.makeText(this, input + name + type + amount + date, Toast.LENGTH_SHORT).show();
+        long id = db.insertData(input, name, type, amount, date);
         if (id < 0)
         {
             Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
