@@ -106,7 +106,9 @@ public class InputActivity extends AppCompatActivity {
 
     //button click to open income page
     public void incomePage(View view){
+        String input = "Income";
         Intent intent = new Intent(this, IncomeActivity.class);
+        intent.putExtra("query",input);
         startActivity(intent);
     }
     //button click to open expense page

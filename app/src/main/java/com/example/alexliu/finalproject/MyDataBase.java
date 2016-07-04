@@ -45,25 +45,12 @@ public class MyDataBase {
     {
         //select plants from database of type 'herb'
         SQLiteDatabase db = helper.getWritableDatabase();
-        String[] columns = {Constants.UID, Constants.INPUT,Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
+        String[] columns = {Constants.UID,Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
 
-        String selection = Constants.TYPE + "='" +type+ "'";  //Constants.TYPE = 'type'
+        String selection = Constants.INPUT + "='" +type+ "'";  //Constants.TYPE = 'type'
         Cursor cursor = db.query(Constants.TABLE_NAME, columns, selection, null, null, null, null);
         return cursor;
-//        StringBuffer buffer = new StringBuffer();
-//        while (cursor.moveToNext()) {
-//
-//            int index1 = cursor.getColumnIndex(Constants.NAME);
-//            int index2 = cursor.getColumnIndex(Constants.TYPE);
-//            int index3 = cursor.getColumnIndex(Constants.LOCATION);
-//            int index4 = cursor.getColumnIndex(Constants.LATIN);
-//            String plantName = cursor.getString(index1);
-//            String plantType = cursor.getString(index2);
-//            String plantLoc = cursor.getString(index3);
-//            String plantLat = cursor.getString(index4);
-//            buffer.append(plantName + " " + plantType + plantLoc + "" + plantLat +"\n");
-//        }
-//        return buffer.toString();
+
     }
 
 }
