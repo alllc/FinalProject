@@ -47,6 +47,7 @@ public class InputActivity extends AppCompatActivity {
                 String[] m = getResources().getStringArray(
                         R.array.input_type);
                 mInput = m[position];
+                //if income, then show income type, else show expense
                 if(position == 0){
                     moneyType.setAdapter(adapterincomeType);
                     adapterType = adapterincomeType;
@@ -70,26 +71,22 @@ public class InputActivity extends AppCompatActivity {
     class SpinnerXMLSelectedListener implements AdapterView.OnItemSelectedListener {
         public void onItemSelected(AdapterView<?> parent, View view, int position,
                                    long id) {
-            textView.setText("The type u choice is：" + mInput + " " + adapterType.getItem(position));
-        }
+            mType = adapterType.getItem(position).toString();
+            textView.setText("The type u choice is：" + mInput + " " + mType);
 
+        }
         public void onNothingSelected(AdapterView<?> arg0) {
 
         }
 
     }
-//        class moneyInputListener implements AdapterView.OnItemSelectedListener{
-//
-//            public void onItemSelected(AdapterView<?> arg0,View arg1, int arg2, long arg3){
-//
-//            }
-//
-//        }
+
+
     public void submitButton (View view)
     {
         String input = mInput;
         String name = moneyName.getText().toString();
-        String type = "null";
+        String type = mType;
         String amount = moneyAmt.getText().toString();
         String date = moneyDate.getText().toString();
         Toast.makeText(this, input + name + type + amount + date, Toast.LENGTH_SHORT).show();
