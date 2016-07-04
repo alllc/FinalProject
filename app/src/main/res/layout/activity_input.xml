@@ -108,7 +108,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/typeSpinner"
                 android:layout_column="1"
-                android:layout_gravity="left" />
+                android:layout_gravity="left"
+                />
         </TableRow>
 
         <TableRow

@@ -20,8 +20,8 @@ public class InputActivity extends AppCompatActivity {
     Spinner moneyInput,moneyType;
     String mInput,mType;
     MyDataBase db;
-//    String[] m={"Income","Expense"};
-//    ArrayAdapter<String> adapter;
+    ArrayAdapter adapterType, adapterincomeType,adapterexpenseType;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,11 @@ public class InputActivity extends AppCompatActivity {
         moneyDate = (EditText)findViewById(R.id.dateEditTxt);
         textView = (TextView)findViewById(R.id.textView6);
         db = new MyDataBase(this);
+        adapterincomeType = ArrayAdapter.createFromResource(this,R.array.income_type,android.R.layout.simple_spinner_dropdown_item);
+        adapterincomeType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterexpenseType = ArrayAdapter.createFromResource(this,R.array.expense_type,android.R.layout.simple_spinner_dropdown_item);
+        adapterexpenseType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         moneyInput.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> parent, View view,
@@ -42,27 +47,37 @@ public class InputActivity extends AppCompatActivity {
                 String[] m = getResources().getStringArray(
                         R.array.input_type);
                 mInput = m[position];
+                if(position == 0){
+                    moneyType.setAdapter(adapterincomeType);
+                    adapterType = adapterincomeType;
+                }else if(position == 1){
+                    moneyType.setAdapter(adapterexpenseType);
+                    adapterType = adapterexpenseType;
+                }
                 textView.setText("The type u choice is：" + m[position]);//显示
-
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
-//        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,m);
-//
-//        //dropdown style
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        //add adapter to spinner
-//        moneyInput.setAdapter(adapter);
-//
-//        //adding listener
-//        moneyInput.setOnItemSelectedListener(new moneyInputListener());
+
+        moneyType.setOnItemSelectedListener(new SpinnerXMLSelectedListener());
+        moneyType.setVisibility(View.VISIBLE);
+
 
     }
+    class SpinnerXMLSelectedListener implements AdapterView.OnItemSelectedListener {
+        public void onItemSelected(AdapterView<?> parent, View view, int position,
+                                   long id) {
+            textView.setText("The type u choice is：" + mInput + " " + adapterType.getItem(position));
+        }
 
+        public void onNothingSelected(AdapterView<?> arg0) {
+
+        }
+
+    }
 //        class moneyInputListener implements AdapterView.OnItemSelectedListener{
 //
 //            public void onItemSelected(AdapterView<?> arg0,View arg1, int arg2, long arg3){
