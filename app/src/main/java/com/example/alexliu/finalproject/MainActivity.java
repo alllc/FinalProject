@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView incomeNumView;
     Cursor c;
 
-    int sum = c.getInt(c.getColumnIndex("sum"));
+//    int sum = c.getInt(c.getColumnIndex("sum"));
 
 
     @Override
@@ -27,14 +27,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         db = new MyDataBase(this);
 
-        //c= db.rawQuery("SELECT SUM(amount) FROM income_table", null);
-        if (c.moveToFirst()){
-            sum = c.getInt(0);
-        } else {
-            sum = -1;
-        }
-        c.close();
-        incomeNumView.setText(""+sum);
+//        //c= db.rawQuery("SELECT SUM(amount) FROM income_table", null);
+//        if (c.moveToFirst()){
+//            sum = c.getInt(0);
+//        } else {
+//            sum = -1;
+//        }
+//        c.close();
+//        incomeNumView.setText(""+sum);
 
         //check if there is a data
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);

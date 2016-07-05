@@ -34,7 +34,7 @@ public class ExpenseActivity extends AppCompatActivity implements AdapterView.On
         }
         // For the cursor adapter, specify which columns go into which views
         String[] fromColumns = { Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
-        int[] toViews = {R.id.plantNameEntry, R.id.plantTypeEntry, R.id.plantLocationEntry, R.id.plantLatinEntry }; // The TextView in simple_list_item_1
+        int[] toViews = {R.id.nameEntry, R.id.typeEntry, R.id.amountEntry, R.id.dateEntry }; // The TextView in simple_list_item_1
 
         myAdapter = new SimpleCursorAdapter(this, R.layout.list_row, cursor, fromColumns, toViews, 4);
         myList.setAdapter(myAdapter);
@@ -42,10 +42,10 @@ public class ExpenseActivity extends AppCompatActivity implements AdapterView.On
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        TextView plantNameTextView = (TextView) view.findViewById(R.id.plantNameEntry);
-        TextView plantTypeTextView = (TextView) view.findViewById(R.id.plantTypeEntry);
-        TextView plantLocationTextView = (TextView) view.findViewById(R.id.plantLocationEntry);
-        TextView plantLatinTextView = (TextView) view.findViewById(R.id.plantLatinEntry);
+        TextView plantNameTextView = (TextView) view.findViewById(R.id.nameEntry);
+        TextView plantTypeTextView = (TextView) view.findViewById(R.id.typeEntry);
+        TextView plantLocationTextView = (TextView) view.findViewById(R.id.amountEntry);
+        TextView plantLatinTextView = (TextView) view.findViewById(R.id.dateEntry);
 //      Toast.makeText(this, "row " + (1 + position) + ":  " + plantNameTextView.getText() + " " + plantTypeTextView.getText() + " " + plantLocationTextView.getText() + " " + plantLatinTextView.getText(), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra("INPUT",queryResult);
