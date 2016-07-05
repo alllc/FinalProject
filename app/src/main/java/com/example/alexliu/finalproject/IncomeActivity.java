@@ -89,6 +89,4 @@ public class IncomeActivity extends AppCompatActivity implements AdapterView.OnI
         Intent intent = new Intent(this, SettingActivity.class);
         startActivity(intent);
     }
-
-
 }
