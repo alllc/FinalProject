@@ -31,12 +31,16 @@ public class MainActivity extends AppCompatActivity {
     }
     //button click to open income page
     public void incomePage(View view){
+        String input = "Income";
         Intent intent = new Intent(this, IncomeActivity.class);
+        intent.putExtra("query",input);
         startActivity(intent);
     }
     //button click to open expense page
     public void expensePage(View view){
+        String inputT = "Expense";
         Intent intent = new Intent(this, ExpenseActivity.class);
+        intent.putExtra("query",inputT);
         startActivity(intent);
     }
     //button click to open input page

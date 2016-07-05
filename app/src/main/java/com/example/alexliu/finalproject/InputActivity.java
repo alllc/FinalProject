@@ -90,7 +90,7 @@ public class InputActivity extends AppCompatActivity {
         String amount = moneyAmt.getText().toString();
         String date = moneyDate.getText().toString();
         Toast.makeText(this, input + name + type + amount + date, Toast.LENGTH_SHORT).show();
-        long id = db.insertData( name, type, amount, date);
+        long id = db.insertData(input,name, type, amount, date);
         if (id < 0)
         {
             Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
@@ -101,23 +101,24 @@ public class InputActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
-        mInput = null;
+
         moneyName.setText("");
-        mType = null;
         moneyAmt.setText("");
         moneyDate.setText("");
     }
 
     //button click to open income page
     public void incomePage(View view){
-//        String input = "Income";
+        String input = "Income";
         Intent intent = new Intent(this, IncomeActivity.class);
-//        intent.putExtra("query",input);
+        intent.putExtra("query",input);
         startActivity(intent);
     }
     //button click to open expense page
     public void expensePage(View view){
+        String inputT = "Expense";
         Intent intent = new Intent(this, ExpenseActivity.class);
+        intent.putExtra("query",inputT);
         startActivity(intent);
     }
     //button click to open input page

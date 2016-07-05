@@ -15,7 +15,7 @@ import android.widget.Toast;
 /**
  * Created by alexliu on 16-07-01.
  */
-public class MoneyListViewActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class IncomeActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     ListView myList;
     MyDataBase db;
     SimpleCursorAdapter myAdapter;
@@ -53,14 +53,14 @@ public class MoneyListViewActivity extends AppCompatActivity implements AdapterV
     //button click to open income page
     public void incomePage(View view){
         String input = "Income";
-        Intent intent = new Intent(this, MoneyListViewActivity.class);
+        Intent intent = new Intent(this, IncomeActivity.class);
         intent.putExtra("query",input);
         startActivity(intent);
     }
     //button click to open expense page
     public void expensePage(View view){
         String inputT = "Expense";
-        Intent intent = new Intent(this, MoneyListViewActivity.class);
+        Intent intent = new Intent(this, ExpenseActivity.class);
         intent.putExtra("query",inputT);
         startActivity(intent);
     }

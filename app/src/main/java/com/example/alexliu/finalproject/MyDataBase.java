@@ -18,10 +18,11 @@ public class MyDataBase {
         helper = new MyHelper(context);
     }
 
-    public long insertData (String name, String type, String amount, String date)
+    public long insertData (String input, String name, String type, String amount, String date)
     {
         SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put(Constants.INPUT, input);
         contentValues.put(Constants.NAME, name);
         contentValues.put(Constants.TYPE, type);
         contentValues.put(Constants.AMOUNT, amount);
@@ -40,13 +41,13 @@ public class MyDataBase {
     }
 
 
-    public Cursor getSelectedData(String type)
+    public Cursor getSelectedData(String input)
     {
         //select plants from database of type 'herb'
         SQLiteDatabase db = helper.getWritableDatabase();
         String[] columns = {Constants.UID, Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
 
-        String selection = Constants.TYPE + "='" +type+ "'";  //Constants.TYPE = 'type'
+        String selection = Constants.INPUT + "='" +input+ "'";  //Constants.TYPE = 'type'
         Cursor cursor = db.query(Constants.TABLE_NAME, columns, selection, null, null, null, null);
         return cursor;
 
