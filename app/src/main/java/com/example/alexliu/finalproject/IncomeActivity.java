@@ -27,28 +27,38 @@ public class IncomeActivity extends AppCompatActivity implements AdapterView.OnI
         myList = (ListView)findViewById(R.id.listView);
         db = new MyDataBase(this);
 
+
         Intent intent = getIntent();
         Cursor cursor = null;
-        if(intent. hasExtra("query")){
+
+        if(intent.hasExtra("query")){
             String queryResult = intent.getStringExtra("query");
             cursor = db.getSelectedData(queryResult);
+        } else {
+            cursor = db.getData();
         }
+
         // For the cursor adapter, specify which columns go into which views
-        String[] fromColumns = { Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
-        int[] toViews = {R.id.plantNameEntry, R.id.plantTypeEntry, R.id.plantLocationEntry, R.id.plantLatinEntry }; // The TextView in simple_list_item_1
+        String[] fromColumns = {Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
+        int[] toViews = {R.id.nameEntry, R.id.typeEntry, R.id.amountEntry, R.id.dateEntry }; // The TextView in simple_list_item_1
+
 
         myAdapter = new SimpleCursorAdapter(this, R.layout.list_row, cursor, fromColumns, toViews, 4);
         myList.setAdapter(myAdapter);
         myList.setOnItemClickListener(this);
     }
 
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        TextView plantNameTextView = (TextView) view.findViewById(R.id.plantNameEntry);
-        TextView plantTypeTextView = (TextView) view.findViewById(R.id.plantTypeEntry);
-        TextView plantLocationTextView = (TextView) view.findViewById(R.id.plantLocationEntry);
-        TextView plantLatinTextView = (TextView) view.findViewById(R.id.plantLatinEntry);
-//      Toast.makeText(this, "row " + (1 + position) + ":  " + plantNameTextView.getText() + " " + plantTypeTextView.getText() + " " + plantLocationTextView.getText() + " " + plantLatinTextView.getText(), Toast.LENGTH_LONG).show();
-        }
+        LinearLayout clickedRow = (LinearLayout) view;
+        TextView nameTextView = (TextView) view.findViewById(R.id.nameEntry);
+        TextView typeTextView = (TextView) view.findViewById(R.id.typeEntry);
+        TextView amountTextView = (TextView) view.findViewById(R.id.amountEntry);
+        TextView dateTextView = (TextView) view.findViewById(R.id.dateEntry);
+        Toast.makeText(this, "row " + (1+position) + ":  " + nameTextView.getText() +" "+ typeTextView.getText()+" "+ amountTextView.getText()+" "+ dateTextView.getText(), Toast.LENGTH_LONG).show();
+
+    }
+
 
     //button click to open income page
     public void incomePage(View view){
@@ -79,4 +89,6 @@ public class IncomeActivity extends AppCompatActivity implements AdapterView.OnI
         Intent intent = new Intent(this, SettingActivity.class);
         startActivity(intent);
     }
+
+
 }
