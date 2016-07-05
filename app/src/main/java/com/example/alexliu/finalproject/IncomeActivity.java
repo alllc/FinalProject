@@ -15,7 +15,7 @@ import android.widget.Toast;
 /**
  * Created by alexliu on 16-07-01.
  */
-public class IncomeActivity extends AppCompatActivity {
+public class IncomeActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     ListView myList;
     MyDataBase db;
     SimpleCursorAdapter myAdapter;
@@ -24,7 +24,31 @@ public class IncomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_income);
 
+        myList = (ListView)findViewById(R.id.listView);
+        db = new MyDataBase(this);
+
+        Intent intent = getIntent();
+        Cursor cursor = null;
+        if(intent. hasExtra("query")){
+            String queryResult = intent.getStringExtra("query");
+            cursor = db.getSelectedData(queryResult);
+        }
+        // For the cursor adapter, specify which columns go into which views
+        String[] fromColumns = {Constants.INPUT, Constants.NAME, Constants.TYPE, Constants.AMOUNT};
+        int[] toViews = {R.id.plantNameEntry, R.id.plantTypeEntry, R.id.plantLocationEntry, R.id.plantLatinEntry }; // The TextView in simple_list_item_1
+
+        myAdapter = new SimpleCursorAdapter(this, R.layout.list_row, cursor, fromColumns, toViews, 4);
+        myList.setAdapter(myAdapter);
+        myList.setOnItemClickListener(this);
     }
+
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        TextView plantNameTextView = (TextView) view.findViewById(R.id.plantNameEntry);
+        TextView plantTypeTextView = (TextView) view.findViewById(R.id.plantTypeEntry);
+        TextView plantLocationTextView = (TextView) view.findViewById(R.id.plantLocationEntry);
+        TextView plantLatinTextView = (TextView) view.findViewById(R.id.plantLatinEntry);
+//      Toast.makeText(this, "row " + (1 + position) + ":  " + plantNameTextView.getText() + " " + plantTypeTextView.getText() + " " + plantLocationTextView.getText() + " " + plantLatinTextView.getText(), Toast.LENGTH_LONG).show();
+        }
 
     //button click to open income page
     public void incomePage(View view){

@@ -31,23 +31,23 @@ public class MyDataBase {
         return id;
     }
 
-    public Cursor getData()
-    {
-        SQLiteDatabase db = helper.getWritableDatabase();
+//    public Cursor getData()
+//    {
+//        SQLiteDatabase db = helper.getWritableDatabase();
+//
+//        String[] columns = {Constants.UID, Constants.INPUT, Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
+//        Cursor cursor = db.query(Constants.TABLE_NAME, columns, null, null, null, null, null);
+//        return cursor;
+//    }
 
-        String[] columns = {Constants.UID, Constants.INPUT, Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
-        Cursor cursor = db.query(Constants.TABLE_NAME, columns, null, null, null, null, null);
-        return cursor;
-    }
 
-
-    public Cursor getSelectedData(String type)
+    public Cursor getSelectedData(String input)
     {
         //select plants from database of type 'herb'
         SQLiteDatabase db = helper.getWritableDatabase();
-        String[] columns = {Constants.UID,Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
+        String[] columns = {Constants.UID,Constants.INPUT, Constants.NAME, Constants.TYPE, Constants.AMOUNT,Constants.DATE};
 
-        String selection = Constants.INPUT + "='" +type+ "'";  //Constants.TYPE = 'type'
+        String selection = Constants.INPUT + "='" +input+ "'";  //Constants.TYPE = 'type'
         Cursor cursor = db.query(Constants.TABLE_NAME, columns, selection, null, null, null, null);
         return cursor;
 

@@ -84,9 +84,9 @@ public class InputActivity extends AppCompatActivity {
 
     public void submitButton (View view)
     {
-        String input = mInput;
+        String input = mInput.toString();
         String name = moneyName.getText().toString();
-        String type = mType;
+        String type = mType.toString();
         String amount = moneyAmt.getText().toString();
         String date = moneyDate.getText().toString();
         Toast.makeText(this, input + name + type + amount + date, Toast.LENGTH_SHORT).show();
@@ -101,7 +101,11 @@ public class InputActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
-
+        mInput = null;
+        moneyName.setText("");
+        mType = null;
+        moneyAmt.setText("");
+        moneyDate.setText("");
     }
 
     //button click to open income page
