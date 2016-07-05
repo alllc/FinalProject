@@ -17,6 +17,7 @@ public class ExpenseActivity extends AppCompatActivity implements AdapterView.On
     ListView myList;
     MyDataBase db;
     SimpleCursorAdapter myAdapter;
+    String queryResult;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +29,7 @@ public class ExpenseActivity extends AppCompatActivity implements AdapterView.On
         Intent intent = getIntent();
         Cursor cursor = null;
         if(intent. hasExtra("query")){
-            String queryResult = intent.getStringExtra("query");
+            queryResult = intent.getStringExtra("query");
             cursor = db.getSelectedData(queryResult);
         }
         // For the cursor adapter, specify which columns go into which views
@@ -46,7 +47,14 @@ public class ExpenseActivity extends AppCompatActivity implements AdapterView.On
         TextView plantLocationTextView = (TextView) view.findViewById(R.id.plantLocationEntry);
         TextView plantLatinTextView = (TextView) view.findViewById(R.id.plantLatinEntry);
 //      Toast.makeText(this, "row " + (1 + position) + ":  " + plantNameTextView.getText() + " " + plantTypeTextView.getText() + " " + plantLocationTextView.getText() + " " + plantLatinTextView.getText(), Toast.LENGTH_LONG).show();
-        }
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("INPUT",queryResult);
+        intent.putExtra("NAME", plantNameTextView.getText());
+        intent.putExtra("TYPE",plantTypeTextView.getText());
+        intent.putExtra("AMOUNT", plantLocationTextView.getText());
+        intent.putExtra("DATE", plantLatinTextView.getText());
+        startActivity(intent);
+    }
 
     //button click to open income page
     public void incomePage(View view){
