@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -29,21 +28,27 @@ public class IncomeActivity extends AppCompatActivity implements AdapterView.OnI
         myList = (ListView)findViewById(R.id.listView);
         db = new MyDataBase(this);
 
+
         Intent intent = getIntent();
         Cursor cursor = null;
         if(intent. hasExtra("query")){
             queryResult = intent.getStringExtra("query");
             cursor = db.getSelectedData(queryResult);
+        } else {
+            cursor = db.getData();
         }
+
         // For the cursor adapter, specify which columns go into which views
         String[] fromColumns = { Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
         int[] toViews = {R.id.plantNameEntry, R.id.plantTypeEntry, R.id.plantLocationEntry, R.id.plantLatinEntry }; // The TextView in simple_list_item_1
+
 
         myAdapter = new SimpleCursorAdapter(this, R.layout.list_row, cursor, fromColumns, toViews, 4);
         myList.setAdapter(myAdapter);
         myList.setOnItemClickListener(this);
     }
 
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         TextView plantNameTextView = (TextView) view.findViewById(R.id.plantNameEntry);
         TextView plantTypeTextView = (TextView) view.findViewById(R.id.plantTypeEntry);
