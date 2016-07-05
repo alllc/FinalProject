@@ -4,15 +4,39 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 
 /**
  * Created by alexliu on 16-07-01.
  */
 public class DetailActivity extends AppCompatActivity {
+    String input,name,type,amount,date;
+    TextView inputTxt,nameTxt,typeTxt,amountTxt,dateTxt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        if(b!=null){
+            input = (String) b.get("INPUT");
+            name = (String) b.get("NAME");
+            type = (String) b.get("TYPE");
+            amount = (String) b.get("AMOUNT");
+            date = (String) b.get("DATE");
+        }
+        inputTxt = (TextView)findViewById(R.id.InputType);
+        nameTxt = (TextView)findViewById(R.id.Name);
+        typeTxt = (TextView)findViewById(R.id.Type);
+        amountTxt = (TextView)findViewById(R.id.Amount);
+        dateTxt = (TextView)findViewById(R.id.Date);
+
+        inputTxt.setText(input);
+        nameTxt.setText(name);
+        typeTxt.setText(type);
+        amountTxt.setText(amount);
+        dateTxt.setText(date);
 
     }
     //button click to open income page

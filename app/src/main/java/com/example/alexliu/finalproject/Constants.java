@@ -10,7 +10,7 @@ public class Constants {
     public static final String INPUT = "Input";
     public static final String NAME = "Name";
     public static final String TYPE = "Type";
-    public static final String AMOUNT = "Location";
-    public static final String DATE = "Latin";
-    public static final int DATABASE_VERSION = 13;
+    public static final String AMOUNT = "Amount";
+    public static final String DATE = "Date";
+    public static final int DATABASE_VERSION = 16;
 }
