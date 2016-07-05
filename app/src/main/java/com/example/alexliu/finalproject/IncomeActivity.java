@@ -15,7 +15,7 @@ import android.widget.Toast;
 /**
  * Created by alexliu on 16-07-01.
  */
-public class IncomeActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MoneyListViewActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     ListView myList;
     MyDataBase db;
     SimpleCursorAdapter myAdapter;
@@ -29,12 +29,10 @@ public class IncomeActivity extends AppCompatActivity implements AdapterView.OnI
 
         Intent intent = getIntent();
         Cursor cursor = null;
-//        if(intent. hasExtra("query")){
-//            String queryResult = intent.getStringExtra("query");
-//            cursor = db.getSelectedData(queryResult);
-//        }else{
-            cursor = db.getData();
-//        }
+        if(intent. hasExtra("query")){
+            String queryResult = intent.getStringExtra("query");
+            cursor = db.getSelectedData(queryResult);
+        }
         // For the cursor adapter, specify which columns go into which views
         String[] fromColumns = { Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
         int[] toViews = {R.id.plantNameEntry, R.id.plantTypeEntry, R.id.plantLocationEntry, R.id.plantLatinEntry }; // The TextView in simple_list_item_1
@@ -55,13 +53,15 @@ public class IncomeActivity extends AppCompatActivity implements AdapterView.OnI
     //button click to open income page
     public void incomePage(View view){
         String input = "Income";
-        Intent intent = new Intent(this, IncomeActivity.class);
+        Intent intent = new Intent(this, MoneyListViewActivity.class);
         intent.putExtra("query",input);
         startActivity(intent);
     }
     //button click to open expense page
     public void expensePage(View view){
-        Intent intent = new Intent(this, ExpenseActivity.class);
+        String inputT = "Expense";
+        Intent intent = new Intent(this, MoneyListViewActivity.class);
+        intent.putExtra("query",inputT);
         startActivity(intent);
     }
     //button click to open input page
