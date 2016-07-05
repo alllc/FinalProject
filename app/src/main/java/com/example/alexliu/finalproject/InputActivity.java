@@ -84,13 +84,13 @@ public class InputActivity extends AppCompatActivity {
 
     public void submitButton (View view)
     {
-        String input = mInput.toString();
+        String input = mInput;
         String name = moneyName.getText().toString();
-        String type = mType.toString();
+        String type = mType;
         String amount = moneyAmt.getText().toString();
         String date = moneyDate.getText().toString();
         Toast.makeText(this, input + name + type + amount + date, Toast.LENGTH_SHORT).show();
-        long id = db.insertData(input, name, type, amount, date);
+        long id = db.insertData( name, type, amount, date);
         if (id < 0)
         {
             Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
@@ -110,9 +110,9 @@ public class InputActivity extends AppCompatActivity {
 
     //button click to open income page
     public void incomePage(View view){
-        String input = "Income";
+//        String input = "Income";
         Intent intent = new Intent(this, IncomeActivity.class);
-        intent.putExtra("query",input);
+//        intent.putExtra("query",input);
         startActivity(intent);
     }
     //button click to open expense page

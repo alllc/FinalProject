@@ -29,12 +29,14 @@ public class IncomeActivity extends AppCompatActivity implements AdapterView.OnI
 
         Intent intent = getIntent();
         Cursor cursor = null;
-        if(intent. hasExtra("query")){
-            String queryResult = intent.getStringExtra("query");
-            cursor = db.getSelectedData(queryResult);
-        }
+//        if(intent. hasExtra("query")){
+//            String queryResult = intent.getStringExtra("query");
+//            cursor = db.getSelectedData(queryResult);
+//        }else{
+            cursor = db.getData();
+//        }
         // For the cursor adapter, specify which columns go into which views
-        String[] fromColumns = {Constants.INPUT, Constants.NAME, Constants.TYPE, Constants.AMOUNT};
+        String[] fromColumns = { Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
         int[] toViews = {R.id.plantNameEntry, R.id.plantTypeEntry, R.id.plantLocationEntry, R.id.plantLatinEntry }; // The TextView in simple_list_item_1
 
         myAdapter = new SimpleCursorAdapter(this, R.layout.list_row, cursor, fromColumns, toViews, 4);
