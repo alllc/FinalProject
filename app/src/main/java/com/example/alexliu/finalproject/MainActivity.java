@@ -3,19 +3,38 @@ package com.example.alexliu.finalproject;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    MyDataBase db;
     public static final String DEFAULT = "not available";
+    private TextView incomeNumView;
+    Cursor c;
+
+    int sum = c.getInt(c.getColumnIndex("sum"));
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        TextView incomeNumView = (TextView)findViewById(R.id.incomeNumTxt);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db = new MyDataBase(this);
+
+        //c= db.rawQuery("SELECT SUM(amount) FROM income_table", null);
+        if (c.moveToFirst()){
+            sum = c.getInt(0);
+        } else {
+            sum = -1;
+        }
+        c.close();
+        incomeNumView.setText(""+sum);
 
         //check if there is a data
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
@@ -29,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 //            startActivity(intent);
 //        }
     }
+
     //button click to open income page
     public void incomePage(View view){
         String input = "Income";
