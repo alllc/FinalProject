@@ -13,37 +13,49 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    MyDataBase db;
     public static final String DEFAULT = "not available";
-    TextView incomeNumView;
-    Cursor c;
-    int sum;
+    TextView incomeNumTxt, expenseNumTxt, resultNumTxt;
+    MyDataBase db;
+    Cursor c_income, c_expense;
+    int sum_income, sum_expense, total;
 //    int sum = c.getInt(c.getColumnIndex("sum"));
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        incomeNumView = (TextView)findViewById(R.id.incomeNumTxt);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        incomeNumTxt = (TextView)findViewById(R.id.incomeNumTxt);
+        expenseNumTxt = (TextView)findViewById(R.id.expenseNumTxt);
+        resultNumTxt = (TextView)findViewById(R.id.resultNumTxt);
         db = new MyDataBase(this);
 
-//        c = db.amountData("Income");
-//
-//        String [] amount = {Constants.AMOUNT.toString()};
-//
-//
-//        Toast.makeText(this,"amount number: " + amount,Toast.LENGTH_LONG).show();
+        c_income = db.query_income();
+        if (c_income != null && c_income.getCount() > 0) {
+            if (c_income.moveToFirst()){
+                sum_income = c_income.getInt(0);
+            }else {
+                sum_income = -1;
+            }
+        }else {
+            sum_income = -2;
+        }
+        incomeNumTxt.setText(" $ "+sum_income);
 
-//        incomeNumView.setText(sum);
-//        c= db.rawQuery("SELECT SUM(amount) FROM income_table", null);
-//        if (c.moveToFirst()){
-//            sum = c.getInt(0);
-//        } else {
-//            sum = -1;
-//        }
-//        c.close();
-//        incomeNumView.setText(""+sum);
+        c_expense = db.query_expense();
+        if (c_expense != null && c_expense.getCount() > 0) {
+            if (c_expense.moveToFirst()){
+                sum_expense = c_expense.getInt(0);
+            }else {
+                sum_expense = -1;
+            }
+        }else {
+            sum_expense = -2;
+        }
+        expenseNumTxt.setText(" $ "+sum_expense);
+
+        total = sum_income - sum_expense;
+        resultNumTxt.setText(" $ "+total);
 
         //check if there is a data
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);

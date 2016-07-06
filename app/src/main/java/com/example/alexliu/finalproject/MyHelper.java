@@ -1,9 +1,11 @@
 package com.example.alexliu.finalproject;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -12,6 +14,7 @@ import android.widget.Toast;
 public class MyHelper extends SQLiteOpenHelper {
 
     private Context context;
+    private static SQLiteDatabase mDataBase;
 
     private static final String CREATE_TABLE =
             "CREATE TABLE "+
@@ -50,4 +53,11 @@ public class MyHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "exception onUpgrade() db", Toast.LENGTH_LONG).show();
         }
     }
+
+    public Cursor select(String query) throws SQLException {
+        return mDataBase.rawQuery(query, null);
+    }
+
+
+
 }

@@ -10,11 +10,16 @@ import android.database.sqlite.SQLiteDatabase;
  */
 public class MyDataBase {
     private Context context;
+    private SQLiteDatabase db;
     private final MyHelper helper;
 
     public MyDataBase (Context c){
         context = c;
         helper = new MyHelper(context);
+    }
+
+    public void close(){
+        helper.close();
     }
 
     public long insertData (String input, String name, String type, String amount, String date)
@@ -57,6 +62,18 @@ public class MyDataBase {
 
         String selection = Constants.INPUT + "='" +input+ "'";  //Constants.TYPE = 'type'
         Cursor cursor = db.query(Constants.TABLE_NAME, columns, selection, null, null, null, null);
+        return cursor;
+    }
+
+    public Cursor query_income(){
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT SUM(Amount) FROM PLANTSTABLE WHERE Input ='Income'", null);
+        return cursor;
+    }
+
+    public Cursor query_expense(){
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT SUM(Amount) FROM PLANTSTABLE WHERE Input ='Expense'", null);
         return cursor;
     }
 }
