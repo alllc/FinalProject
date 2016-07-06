@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         String loginUser = sharedPrefs.getString("loginUser", DEFAULT);
         String loginPassword = sharedPrefs.getString("loginPassword", DEFAULT);
-        //check if there is a data
+        //check if there is a data on user
+        Toast.makeText(this,"loading to log in page",Toast.LENGTH_LONG).show();
         if(loginUser.equals(DEFAULT) && loginPassword.equals(DEFAULT)){
             Toast.makeText(this,"No user log in, loading to log in page",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, LoginActivity.class);
