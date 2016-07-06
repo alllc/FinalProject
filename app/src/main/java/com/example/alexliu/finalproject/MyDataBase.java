@@ -56,14 +56,6 @@ public class MyDataBase {
         return cursor;
     }
 
-    public Cursor amountData(String input){
-        SQLiteDatabase db = helper.getWritableDatabase();
-        String[] columns = {Constants.AMOUNT};
-
-        String selection = Constants.INPUT + "='" +input+ "'";  //Constants.TYPE = 'type'
-        Cursor cursor = db.query(Constants.TABLE_NAME, columns, selection, null, null, null, null);
-        return cursor;
-    }
 
     public Cursor query_income(){
         SQLiteDatabase db = helper.getReadableDatabase();
