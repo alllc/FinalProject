@@ -21,7 +21,7 @@ public class ExpenseActivity extends AppCompatActivity implements AdapterView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_income);
+        setContentView(R.layout.activity_expense);
 
         myList = (ListView)findViewById(R.id.listView);
         db = new MyDataBase(this);
