@@ -4,7 +4,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.alexliu.finalproject.IncomeActivity"
-    android:background="#56dfe6">
+    android:background="#FFFFFF">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -89,5 +89,6 @@
         android:id="@+id/listView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/tableLayout2" />
+        android:layout_above="@+id/tableLayout2"
+        android:padding="20dp"/>
 </RelativeLayout>

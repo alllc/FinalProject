@@ -4,7 +4,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.alexliu.finalproject.DetailActivity"
-    android:background="#56dfe6">
+    android:background="#FFFFFF">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -89,7 +89,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/tableLayout3">
+        android:layout_above="@+id/tableLayout3"
+        android:padding="20dp">
 
         <TextView
             android:layout_width="wrap_content"

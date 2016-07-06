@@ -4,7 +4,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.alexliu.finalproject.InputActivity"
-    android:background="#56dfe6">
+    android:background="#FFFFFF"
+    android:padding="20dp">
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,7 +41,7 @@
                     android:layout_weight="1"
                     android:layout_height="fill_parent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/income"
+                    android:src="@drawable/incomegrey"
                     android:background="@android:color/white"
                     android:padding="10dp"
                     android:onClick="incomePage" />
@@ -50,7 +52,7 @@
                     android:layout_weight="1"
                     android:layout_height="fill_parent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/outcome"
+                    android:src="@drawable/expense"
                     android:background="@android:color/white"
                     android:padding="10dp"
                     android:onClick="expensePage" />
@@ -72,7 +74,7 @@
                     android:layout_weight="1"
                     android:layout_height="fill_parent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/setting"
+                    android:src="@drawable/settinggrey"
                     android:background="@android:color/white"
                     android:padding="10dp"
                     android:onClick="settingPage" />
@@ -224,7 +226,9 @@
                 android:layout_column="0"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:onClick="submitButton" />
+                android:onClick="submitButton"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/colorWhite"/>
         </TableRow>
 
         <TableRow
