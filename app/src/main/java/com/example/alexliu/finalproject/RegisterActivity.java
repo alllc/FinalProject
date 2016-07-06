@@ -17,11 +17,9 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        usernameEditText = (EditText)findViewById(R.id.userNameEditTxt);
-        passwordEditText = (EditText)findViewById(R.id.passWordEditTxt);
-
-
+        setContentView(R.layout.activity_register);
+        usernameEditText = (EditText)findViewById(R.id.userEditText);
+        passwordEditText = (EditText)findViewById(R.id.editText);
 
     }
     public void register (View view){
@@ -29,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putString("username", usernameEditText.getText().toString());
         editor.putString("password", passwordEditText.getText().toString());
-        Toast.makeText(this, "Username and password saved to Preferences, and return to log in page", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Username and password saved to Preferences", Toast.LENGTH_LONG).show();
         editor.commit();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);

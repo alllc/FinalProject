@@ -36,8 +36,9 @@ public class LoginActivity extends AppCompatActivity{
         p = passwordEdit.getText().toString();
         if (username.equals(u) || password.equals(p)) {
             Toast.makeText(this, "Welcome back" + username + " " + password, Toast.LENGTH_LONG).show();
-            String loginUser = sharedPrefs.getString("loginUser",DEFAULT);
-            if (loginUser.equals(DEFAULT)) {
+            String loginU = sharedPrefs.getString("loginUser",DEFAULT);
+            String loginP = sharedPrefs.getString("loginPassword",DEFAULT);
+            if (loginU.equals(DEFAULT)) {
                 SharedPreferences.Editor editor = sharedPrefs.edit();
                 editor.putString("loginUser", u);
                 editor.putString("loginPassword", p);

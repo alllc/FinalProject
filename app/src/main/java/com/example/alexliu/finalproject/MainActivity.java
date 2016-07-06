@@ -8,26 +8,35 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     MyDataBase db;
     public static final String DEFAULT = "not available";
-    private TextView incomeNumView;
+    TextView incomeNumView;
     Cursor c;
-
+    int sum;
 //    int sum = c.getInt(c.getColumnIndex("sum"));
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        TextView incomeNumView = (TextView)findViewById(R.id.incomeNumTxt);
+        incomeNumView = (TextView)findViewById(R.id.incomeNumTxt);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         db = new MyDataBase(this);
 
-//        //c= db.rawQuery("SELECT SUM(amount) FROM income_table", null);
+//        c = db.amountData("Income");
+//
+//        String [] amount = {Constants.AMOUNT.toString()};
+//
+//
+//        Toast.makeText(this,"amount number: " + amount,Toast.LENGTH_LONG).show();
+
+//        incomeNumView.setText(sum);
+//        c= db.rawQuery("SELECT SUM(amount) FROM income_table", null);
 //        if (c.moveToFirst()){
 //            sum = c.getInt(0);
 //        } else {
@@ -41,12 +50,11 @@ public class MainActivity extends AppCompatActivity {
         String loginUser = sharedPrefs.getString("loginUser", DEFAULT);
         String loginPassword = sharedPrefs.getString("loginPassword", DEFAULT);
         //check if there is a data
-//        Toast.makeText(this,"loading to log in page",Toast.LENGTH_LONG).show();
-//        if(loginUser.equals(DEFAULT) && loginPassword.equals(DEFAULT)){
-//            Toast.makeText(this,"No user log in, loading to log in page",Toast.LENGTH_LONG).show();
-//            Intent intent = new Intent(this, LoginActivity.class);
-//            startActivity(intent);
-//        }
+        if(loginUser.equals(DEFAULT) && loginPassword.equals(DEFAULT)){
+            Toast.makeText(this,"No user log in, loading to log in page",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     //button click to open income page

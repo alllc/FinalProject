@@ -30,7 +30,7 @@ public class IncomeActivity extends AppCompatActivity implements AdapterView.OnI
 
 
         Intent intent = getIntent();
-        Cursor cursor = null;
+        Cursor cursor ;
         if(intent. hasExtra("query")){
             queryResult = intent.getStringExtra("query");
             cursor = db.getSelectedData(queryResult);
