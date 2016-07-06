@@ -29,7 +29,7 @@
                     android:layout_weight="1"
                     android:layout_height="fill_parent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/homegrey"
+                    android:src="@drawable/homegrey1"
                     android:background="@android:color/white"
                     android:padding="10dp"
                     android:onClick="resultPage" />
@@ -40,7 +40,7 @@
                     android:layout_weight="1"
                     android:layout_height="fill_parent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/income"
+                    android:src="@drawable/incomegrey"
                     android:background="@android:color/white"
                     android:padding="10dp"
                     android:onClick="incomePage" />
@@ -51,7 +51,7 @@
                     android:layout_weight="1"
                     android:layout_height="fill_parent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/outcome"
+                    android:src="@drawable/expensegrey"
                     android:background="@android:color/white"
                     android:padding="10dp"
                     android:onClick="expensePage" />
@@ -62,7 +62,7 @@
                     android:layout_weight="1"
                     android:layout_height="fill_parent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/input"
+                    android:src="@drawable/incomegrey"
                     android:background="@android:color/white"
                     android:padding="10dp"
                     android:onClick="inputPage" />
@@ -83,13 +83,21 @@
 
     </TableLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Log out"
-        android:id="@+id/button"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="116dp"
-        android:onClick="LogOut" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Log out"
+            android:id="@+id/button"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="116dp"
+            android:onClick="LogOut"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorWhite"/>
+    </TableLayout>
 </RelativeLayout>

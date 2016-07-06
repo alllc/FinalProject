@@ -29,7 +29,7 @@
                     android:layout_weight="1"
                     android:layout_height="fill_parent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/homegrey"
+                    android:src="@drawable/homegrey1"
                     android:background="@android:color/white"
                     android:padding="10dp"
                     android:onClick="resultPage" />
@@ -51,7 +51,7 @@
                     android:layout_weight="1"
                     android:layout_height="fill_parent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/outcome"
+                    android:src="@drawable/expensegrey"
                     android:background="@android:color/white"
                     android:padding="10dp"
                     android:onClick="expensePage" />
@@ -62,7 +62,7 @@
                     android:layout_weight="1"
                     android:layout_height="fill_parent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/input"
+                    android:src="@drawable/notegrey"
                     android:background="@android:color/white"
                     android:padding="10dp"
                     android:onClick="inputPage" />
@@ -73,7 +73,7 @@
                     android:layout_weight="1"
                     android:layout_height="fill_parent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/setting"
+                    android:src="@drawable/settinggrey"
                     android:background="@android:color/white"
                     android:padding="10dp"
                     android:onClick="settingPage" />

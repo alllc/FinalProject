@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="User Name" />
+        android:text="Username:" />
 
     <EditText
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Pass Word" />
+        android:text="Password:" />
 
     <EditText
         android:layout_width="match_parent"
