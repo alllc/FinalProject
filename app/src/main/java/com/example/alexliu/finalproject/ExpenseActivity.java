@@ -1,6 +1,8 @@
 package com.example.alexliu.finalproject;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +20,8 @@ public class ExpenseActivity extends AppCompatActivity implements AdapterView.On
     MyDataBase db;
     SimpleCursorAdapter myAdapter;
     String queryResult;
+    public static final String DEFAULT = "not available";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,11 +30,14 @@ public class ExpenseActivity extends AppCompatActivity implements AdapterView.On
         myList = (ListView)findViewById(R.id.listView);
         db = new MyDataBase(this);
 
+        SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        String loginUser = sharedPrefs.getString("loginUser", DEFAULT);
+
         Intent intent = getIntent();
         Cursor cursor = null;
         if(intent. hasExtra("query")){
             queryResult = intent.getStringExtra("query");
-            cursor = db.getSelectedData(queryResult);
+            cursor = db.getSelectedData(queryResult,loginUser);
         }
         // For the cursor adapter, specify which columns go into which views
         String[] fromColumns = { Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};

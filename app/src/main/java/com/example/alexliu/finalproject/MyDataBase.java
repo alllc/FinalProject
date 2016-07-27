@@ -46,13 +46,14 @@ public class MyDataBase {
     }
 
 
-    public Cursor getSelectedData(String input)
+    public Cursor getSelectedData(String input,String user)
     {
         //select plants from database of type 'herb'
         SQLiteDatabase db = helper.getWritableDatabase();
         String[] columns = {Constants.UID, Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
 
-        String selection = Constants.INPUT + "='" +input+ "'" ;  //Constants.TYPE = 'type'
+//        String selection = Constants.INPUT + "='" +input+ "'" ;  //Constants.TYPE = 'type'
+        String selection = "Input ='Income' and User ='" +user+"'";
         Cursor cursor = db.query(Constants.TABLE_NAME, columns, selection, null, null, null, null);
         return cursor;
     }
