@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     MyDataBase db;
     Cursor c_income, c_expense;
     int sum_income, sum_expense, total;
+    String loginUser;
+
+
 //    int sum = c.getInt(c.getColumnIndex("sum"));
 
 
@@ -37,7 +40,20 @@ public class MainActivity extends AppCompatActivity {
         resultNumTxt = (TextView)findViewById(R.id.resultNumTxt);
         db = new MyDataBase(this);
 
-        c_income = db.query_income();
+        //check if there is a data
+        SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        String loginUser = sharedPrefs.getString("loginUser", DEFAULT);
+        String loginPassword = sharedPrefs.getString("loginPassword", DEFAULT);
+        //check if there is a data on user
+        Toast.makeText(this,"loading to log in page",Toast.LENGTH_LONG).show();
+        if(loginUser.equals(DEFAULT) && loginPassword.equals(DEFAULT)){
+            Toast.makeText(this,"No user log in, loading to log in page",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+
+
+        c_income = db.query_income(loginUser);
         if (c_income != null && c_income.getCount() > 0) {
             if (c_income.moveToFirst()){
                 sum_income = c_income.getInt(0);
@@ -49,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         }
         incomeNumTxt.setText(" $ "+sum_income);
 
-        c_expense = db.query_expense();
+        c_expense = db.query_expense(loginUser);
         if (c_expense != null && c_expense.getCount() > 0) {
             if (c_expense.moveToFirst()){
                 sum_expense = c_expense.getInt(0);
@@ -64,17 +80,7 @@ public class MainActivity extends AppCompatActivity {
         total = sum_income - sum_expense;
         resultNumTxt.setText(" $ "+total);
 
-        //check if there is a data
-        SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
-        String loginUser = sharedPrefs.getString("loginUser", DEFAULT);
-        String loginPassword = sharedPrefs.getString("loginPassword", DEFAULT);
-        //check if there is a data on user
-        Toast.makeText(this,"loading to log in page",Toast.LENGTH_LONG).show();
-        if(loginUser.equals(DEFAULT) && loginPassword.equals(DEFAULT)){
-            Toast.makeText(this,"No user log in, loading to log in page",Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        }
+
     }
 
     //button click to open income page

@@ -1,6 +1,8 @@
 package com.example.alexliu.finalproject;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,12 +23,15 @@ public class InputActivity extends AppCompatActivity {
     String mInput,mType;
     MyDataBase db;
     ArrayAdapter adapterType, adapterincomeType,adapterexpenseType;
-
+    String loginUser;
+    public static final String DEFAULT = "not available";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
+        SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        loginUser = sharedPrefs.getString("loginUser", DEFAULT);
 
         moneyInput = (Spinner)findViewById(R.id.inputSpinner);
         moneyName = (EditText)findViewById(R.id.nameEditTxt);
@@ -89,8 +94,8 @@ public class InputActivity extends AppCompatActivity {
         String type = mType;
         String amount = moneyAmt.getText().toString();
         String date = moneyDate.getText().toString();
-        Toast.makeText(this, input + name + type + amount + date, Toast.LENGTH_SHORT).show();
-        long id = db.insertData(input,name, type, amount, date);
+        Toast.makeText(this, loginUser + input + name + type + amount + date, Toast.LENGTH_SHORT).show();
+        long id = db.insertData(loginUser, input ,name, type, amount, date);
         if (id < 0)
         {
             Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();

@@ -34,11 +34,11 @@ public class LoginActivity extends AppCompatActivity{
         String password = sharedPrefs.getString("password", DEFAULT);
         u = userEdit.getText().toString();
         p = passwordEdit.getText().toString();
-        if (username.equals(u) || password.equals(p)) {
+        if (username.equals(u) && password.equals(p)) {
             Toast.makeText(this, "Welcome back" + username + " " + password, Toast.LENGTH_LONG).show();
             String loginU = sharedPrefs.getString("loginUser",DEFAULT);
             String loginP = sharedPrefs.getString("loginPassword",DEFAULT);
-            if (loginU.equals(DEFAULT)) {
+            if (loginU.equals(DEFAULT) && loginP.equals(DEFAULT)) {
                 SharedPreferences.Editor editor = sharedPrefs.edit();
                 editor.putString("loginUser", u);
                 editor.putString("loginPassword", p);
@@ -49,8 +49,6 @@ public class LoginActivity extends AppCompatActivity{
         } else {
             Toast.makeText(this, "No data", Toast.LENGTH_LONG).show();
             SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putString("username", DEFAULT);
-            editor.putString("password", DEFAULT);
             editor.putString("loginUser", DEFAULT);
             editor.putString("loginPassword", DEFAULT);
             editor.commit();

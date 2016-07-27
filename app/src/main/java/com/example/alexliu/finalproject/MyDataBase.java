@@ -22,10 +22,11 @@ public class MyDataBase {
         helper.close();
     }
 
-    public long insertData (String input, String name, String type, String amount, String date)
+    public long insertData (String user, String input, String name, String type, String amount, String date)
     {
         SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put(Constants.USER, user);
         contentValues.put(Constants.INPUT, input);
         contentValues.put(Constants.NAME, name);
         contentValues.put(Constants.TYPE, type);
@@ -51,21 +52,21 @@ public class MyDataBase {
         SQLiteDatabase db = helper.getWritableDatabase();
         String[] columns = {Constants.UID, Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
 
-        String selection = Constants.INPUT + "='" +input+ "'";  //Constants.TYPE = 'type'
+        String selection = Constants.INPUT + "='" +input+ "'" ;  //Constants.TYPE = 'type'
         Cursor cursor = db.query(Constants.TABLE_NAME, columns, selection, null, null, null, null);
         return cursor;
     }
 
 
-    public Cursor query_income(){
+    public Cursor query_income(String user){
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT SUM(Amount) FROM PLANTSTABLE WHERE Input ='Income'", null);
+        Cursor cursor = db.rawQuery("SELECT SUM(Amount) FROM PLANTSTABLE WHERE Input ='Income' and User ='" + user +"'", null);
         return cursor;
     }
 
-    public Cursor query_expense(){
+    public Cursor query_expense(String user){
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT SUM(Amount) FROM PLANTSTABLE WHERE Input ='Expense'", null);
+        Cursor cursor = db.rawQuery("SELECT SUM(Amount) FROM PLANTSTABLE WHERE Input ='Expense' and User ='" + user + "'", null);
         return cursor;
     }
 }
