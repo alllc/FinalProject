@@ -21,7 +21,8 @@ public class ExpenseActivity extends AppCompatActivity implements AdapterView.On
     SimpleCursorAdapter myAdapter;
     String queryResult;
     public static final String DEFAULT = "not available";
-
+    String name,type,amount,date;
+    Cursor cursor ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,34 +35,42 @@ public class ExpenseActivity extends AppCompatActivity implements AdapterView.On
         String loginUser = sharedPrefs.getString("loginUser", DEFAULT);
 
         Intent intent = getIntent();
-        Cursor cursor = null;
+
         if(intent. hasExtra("query")){
             queryResult = intent.getStringExtra("query");
             cursor = db.getSelectedData(queryResult,loginUser);
+        } else {
+            cursor = db.getData();
         }
+
         // For the cursor adapter, specify which columns go into which views
         String[] fromColumns = { Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
         int[] toViews = {R.id.nameEntry, R.id.typeEntry, R.id.amountEntry, R.id.dateEntry }; // The TextView in simple_list_item_1
-
         myAdapter = new SimpleCursorAdapter(this, R.layout.list_row, cursor, fromColumns, toViews, 4);
         myList.setAdapter(myAdapter);
         myList.setOnItemClickListener(this);
     }
 
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        TextView plantNameTextView = (TextView) view.findViewById(R.id.nameEntry);
-        TextView plantTypeTextView = (TextView) view.findViewById(R.id.typeEntry);
-        TextView plantLocationTextView = (TextView) view.findViewById(R.id.amountEntry);
-        TextView plantLatinTextView = (TextView) view.findViewById(R.id.dateEntry);
+
 //      Toast.makeText(this, "row " + (1 + position) + ":  " + plantNameTextView.getText() + " " + plantTypeTextView.getText() + " " + plantLocationTextView.getText() + " " + plantLatinTextView.getText(), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, DetailActivity.class);
+        cursor.moveToPosition(position);
+        name = cursor.getString(cursor.getColumnIndex(Constants.NAME));
+        type = cursor.getString(cursor.getColumnIndex(Constants.TYPE));
+        amount = cursor.getString(cursor.getColumnIndex(Constants.AMOUNT));
+        date = cursor.getString(cursor.getColumnIndex(Constants.DATE));
         intent.putExtra("INPUT",queryResult);
-        intent.putExtra("NAME", plantNameTextView.getText());
-        intent.putExtra("TYPE",plantTypeTextView.getText());
-        intent.putExtra("AMOUNT", plantLocationTextView.getText());
-        intent.putExtra("DATE", plantLatinTextView.getText());
+//        intent.putExtra("NAME", name);
+//        intent.putExtra("TYPE", type);
+//        intent.putExtra("AMOUNT", amount);
+//        intent.putExtra("DATE", date);
+        String pos = Integer.toString(position);
+        intent.putExtra("POS",pos);
         startActivity(intent);
     }
+
 
     //button click to open income page
     public void incomePage(View view){

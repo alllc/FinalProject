@@ -1,6 +1,9 @@
 package com.example.alexliu.finalproject;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,21 +13,29 @@ import android.widget.TextView;
  * Created by alexliu on 16-07-01.
  */
 public class DetailActivity extends AppCompatActivity {
-    String input,name,type,amount,date;
+    String input,name,type,amount,date, pos;
+    MyDataBase db;
     TextView inputTxt,nameTxt,typeTxt,amountTxt,dateTxt;
-
+    public static final String DEFAULT = "not available";
+    Cursor cursor ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        db = new MyDataBase(this);
+
+        SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        String loginUser = sharedPrefs.getString("loginUser", DEFAULT);
+
         Intent intent = getIntent();
+
         Bundle b = intent.getExtras();
+
         if(b!=null){
             input = (String) b.get("INPUT");
-            name = (String) b.get("NAME");
-            type = (String) b.get("TYPE");
-            amount = (String) b.get("AMOUNT");
-            date = (String) b.get("DATE");
+            pos = (String) b.get("POS");
+            cursor = db.getSelectedData(input,loginUser);
         }
         inputTxt = (TextView)findViewById(R.id.InputType);
         nameTxt = (TextView)findViewById(R.id.Name);
@@ -32,7 +43,15 @@ public class DetailActivity extends AppCompatActivity {
         amountTxt = (TextView)findViewById(R.id.Amount);
         dateTxt = (TextView)findViewById(R.id.Date);
 
-        inputTxt.setText(input);
+        cursor.moveToPosition(Integer.parseInt(pos));
+        String input2 = cursor.getString(cursor.getColumnIndex(Constants.TYPE));
+
+        name = cursor.getString(cursor.getColumnIndex(Constants.NAME));
+        type = cursor.getString(cursor.getColumnIndex(Constants.TYPE));
+        amount = cursor.getString(cursor.getColumnIndex(Constants.AMOUNT));
+        date = cursor.getString(cursor.getColumnIndex(Constants.DATE));
+
+        inputTxt.setText(input2);
         nameTxt.setText(name);
         typeTxt.setText(type);
         amountTxt.setText(amount);
