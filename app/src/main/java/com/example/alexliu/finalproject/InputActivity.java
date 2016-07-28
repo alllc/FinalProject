@@ -44,6 +44,7 @@ public class InputActivity extends AppCompatActivity {
 
         incometypedata = new String[]{"Interest", "Payment", "Others"};
 
+        
 //        adapterincomeType = ArrayAdapter.createFromResource(this,R.array.income_type,android.R.layout.simple_spinner_dropdown_item);
         adapterincomeType = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,incometypedata);
         adapterincomeType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
