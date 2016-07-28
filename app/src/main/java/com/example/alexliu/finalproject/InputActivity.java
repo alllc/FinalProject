@@ -25,6 +25,7 @@ public class InputActivity extends AppCompatActivity {
     ArrayAdapter adapterType, adapterincomeType,adapterexpenseType;
     String loginUser;
     public static final String DEFAULT = "not available";
+    String[] incometypedata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +41,13 @@ public class InputActivity extends AppCompatActivity {
         moneyDate = (EditText)findViewById(R.id.dateEditTxt);
         textView = (TextView)findViewById(R.id.textView6);
         db = new MyDataBase(this);
-        adapterincomeType = ArrayAdapter.createFromResource(this,R.array.income_type,android.R.layout.simple_spinner_dropdown_item);
+
+        incometypedata = new String[]{"Interest", "Payment", "Others"};
+
+//        adapterincomeType = ArrayAdapter.createFromResource(this,R.array.income_type,android.R.layout.simple_spinner_dropdown_item);
+        adapterincomeType = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,incometypedata);
         adapterincomeType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         adapterexpenseType = ArrayAdapter.createFromResource(this,R.array.expense_type,android.R.layout.simple_spinner_dropdown_item);
         adapterexpenseType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 

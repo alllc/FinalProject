@@ -30,6 +30,10 @@ public class SettingActivity extends AppCompatActivity{
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
+    public void TypeEdit (View view){
+        Intent intent = new Intent(this, TypeEditActivity.class);
+        startActivity(intent);
+    }
 
     //button click to open income page
     public void incomePage(View view){

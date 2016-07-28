@@ -4,9 +4,4 @@
         <item>Income</item>
         <item>Expense</item>
     </string-array>
-    <!--<integer-array name="input_type_image">-->
-        <!--<item>-->
-
-        <!--</item>-->
-    <!--</integer-array>-->
 </resources>

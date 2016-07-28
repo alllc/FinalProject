@@ -91,6 +91,19 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Editing Type"
+            android:id="@+id/button3"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="116dp"
+            android:onClick="TypeEdit"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorWhite"
+            android:nestedScrollingEnabled="true" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Log out"
             android:id="@+id/button"
             android:layout_alignParentTop="true"
@@ -99,5 +112,6 @@
             android:onClick="LogOut"
             android:background="@color/colorPrimary"
             android:textColor="@color/colorWhite"/>
+
     </TableLayout>
 </RelativeLayout>

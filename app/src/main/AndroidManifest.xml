@@ -42,7 +42,10 @@
             android:name=".SettingActivity"
             android:label="@string/setting_page">
         </activity>
-
+        <activity
+            android:name=".TypeEditActivity"
+            android:label="@string/setting_page">
+        </activity>
     </application>
 
 </manifest>
