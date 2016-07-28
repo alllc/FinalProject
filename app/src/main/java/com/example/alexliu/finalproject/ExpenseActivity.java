@@ -72,9 +72,9 @@ public class ExpenseActivity extends AppCompatActivity implements AdapterView.On
     }
     //button click to open expense page
     public void expensePage(View view){
-        String inputT = "Expense";
+        String input = "Expense";
         Intent intent = new Intent(this, ExpenseActivity.class);
-        intent.putExtra("query",inputT);
+        intent.putExtra("query",input);
         startActivity(intent);
     }
     //button click to open input page

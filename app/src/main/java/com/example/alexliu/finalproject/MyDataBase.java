@@ -53,7 +53,7 @@ public class MyDataBase {
         String[] columns = {Constants.UID, Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
 
 //        String selection = Constants.INPUT + "='" +input+ "'" ;  //Constants.TYPE = 'type'
-        String selection = "Input ='Income' and User ='" +user+"'";
+        String selection = "Input ='" + input +"' and User ='" +user+"'";
         Cursor cursor = db.query(Constants.TABLE_NAME, columns, selection, null, null, null, null);
         return cursor;
     }

@@ -23,7 +23,7 @@ public class IncomeActivity extends AppCompatActivity implements AdapterView.OnI
     SimpleCursorAdapter myAdapter;
     String queryResult;
     public static final String DEFAULT = "not available";
-
+    String name,type,amount,date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +47,10 @@ public class IncomeActivity extends AppCompatActivity implements AdapterView.OnI
         // For the cursor adapter, specify which columns go into which views
         String[] fromColumns = { Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
         int[] toViews = {R.id.nameEntry, R.id.typeEntry, R.id.amountEntry, R.id.dateEntry }; // The TextView in simple_list_item_1
-
-
+        name = Constants.NAME;
+        type = Constants.TYPE;
+        amount = Constants.AMOUNT;
+        date = Constants.DATE;
         myAdapter = new SimpleCursorAdapter(this, R.layout.list_row, cursor, fromColumns, toViews, 4);
         myList.setAdapter(myAdapter);
         myList.setOnItemClickListener(this);
@@ -62,6 +64,11 @@ public class IncomeActivity extends AppCompatActivity implements AdapterView.OnI
         TextView plantLatinTextView = (TextView) view.findViewById(R.id.dateEntry);
 //      Toast.makeText(this, "row " + (1 + position) + ":  " + plantNameTextView.getText() + " " + plantTypeTextView.getText() + " " + plantLocationTextView.getText() + " " + plantLatinTextView.getText(), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, DetailActivity.class);
+//        intent.putExtra("INPUT",queryResult);
+//        intent.putExtra("NAME", name);
+//        intent.putExtra("TYPE", type);
+//        intent.putExtra("AMOUNT", amount);
+//        intent.putExtra("DATE", date);
         intent.putExtra("INPUT",queryResult);
         intent.putExtra("NAME", plantNameTextView.getText());
         intent.putExtra("TYPE",plantTypeTextView.getText());
@@ -79,9 +86,9 @@ public class IncomeActivity extends AppCompatActivity implements AdapterView.OnI
     }
     //button click to open expense page
     public void expensePage(View view){
-        String inputT = "Expense";
+        String input = "Expense";
         Intent intent = new Intent(this, ExpenseActivity.class);
-        intent.putExtra("query",inputT);
+        intent.putExtra("query",input);
         startActivity(intent);
     }
     //button click to open input page
