@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,7 +22,7 @@ import java.io.ByteArrayOutputStream;
 /**
  * Created by alexliu on 16-07-01.
  */
-public class InputActivity extends AppCompatActivity {
+public class InputActivity extends AppCompatActivity implements LocationListener{
     EditText  moneyName,  moneyAmt, moneyDate;
     TextView textView;
     Spinner moneyInput,moneyType;
@@ -30,7 +32,7 @@ public class InputActivity extends AppCompatActivity {
     String loginUser;
     public static final String DEFAULT = "not available";
     String[] incometypedata;
-
+    byte[] img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +50,7 @@ public class InputActivity extends AppCompatActivity {
 
         incometypedata = new String[]{"Interest", "Payment", "Others"};
 
-        
+
 //        adapterincomeType = ArrayAdapter.createFromResource(this,R.array.income_type,android.R.layout.simple_spinner_dropdown_item);
         adapterincomeType = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,incometypedata);
         adapterincomeType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -82,14 +84,20 @@ public class InputActivity extends AppCompatActivity {
         moneyType.setOnItemSelectedListener(new SpinnerXMLSelectedListener());
         moneyType.setVisibility(View.VISIBLE);
 
+        img = image(R.drawable.homegrey1);//测试用图。 应该是在这里改成相机的
+
+        //gps
 
     }
+
+
+
     class SpinnerXMLSelectedListener implements AdapterView.OnItemSelectedListener {
         public void onItemSelected(AdapterView<?> parent, View view, int position,
                                    long id) {
             mType = adapterType.getItem(position).toString();
-            textView.setText("The type u choice is：" + mInput + " " + mType);
-
+//            textView.setText("The type u choice is：" + mInput + " " + mType);
+            textView.setText(img.toString());
         }
         public void onNothingSelected(AdapterView<?> arg0) {
 
@@ -108,7 +116,7 @@ public class InputActivity extends AppCompatActivity {
         String date = moneyDate.getText().toString();
         Toast.makeText(this, loginUser + input + name + type + amount + date, Toast.LENGTH_SHORT).show();
 
-        byte[] img = image(R.drawable.homegrey1);//测试用图。 应该是在这里改成相机的
+
         long id = db.insertData(loginUser, input ,name, type, amount, date, img);
         if (id < 0)
         {
@@ -134,6 +142,28 @@ public class InputActivity extends AppCompatActivity {
         return baos.toByteArray();
 
     }
+
+    //gps
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+
 
     //button click to open income page
     public void incomePage(View view){

@@ -64,7 +64,7 @@ public class DetailActivity extends AppCompatActivity {
 
 //        byte[] in = cursor.getBlob(cursor.getColumnIndex(Constants.IMAGE));
 //        Bitmap bmpout = BitmapFactory.decodeByteArray(in, 0, in.length);
-
+//
 //        image.setImageBitmap(bmpout);
 
     }
