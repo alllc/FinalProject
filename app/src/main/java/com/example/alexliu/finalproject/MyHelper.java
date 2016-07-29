@@ -25,7 +25,8 @@ public class MyHelper extends SQLiteOpenHelper {
                     Constants.NAME + " TEXT, " +
                     Constants.TYPE + " TEXT, " +
                     Constants.AMOUNT + " TEXT, " +
-                    Constants.DATE + " TEXT);" ;// latin_name location
+                    Constants.DATE + " TEXT, " +
+                    Constants.IMAGE + " BLOB);" ;// latin_name location
 
     private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + Constants.TABLE_NAME;
 

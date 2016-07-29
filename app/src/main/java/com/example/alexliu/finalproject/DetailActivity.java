@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -18,6 +21,8 @@ public class DetailActivity extends AppCompatActivity {
     TextView inputTxt,nameTxt,typeTxt,amountTxt,dateTxt;
     public static final String DEFAULT = "not available";
     Cursor cursor ;
+    ImageView image;
+    String loginUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +31,7 @@ public class DetailActivity extends AppCompatActivity {
         db = new MyDataBase(this);
 
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
-        String loginUser = sharedPrefs.getString("loginUser", DEFAULT);
+        loginUser = sharedPrefs.getString("loginUser", DEFAULT);
 
         Intent intent = getIntent();
 
@@ -57,7 +62,13 @@ public class DetailActivity extends AppCompatActivity {
         amountTxt.setText(amount);
         dateTxt.setText(date);
 
+//        byte[] in = cursor.getBlob(cursor.getColumnIndex(Constants.IMAGE));
+//        Bitmap bmpout = BitmapFactory.decodeByteArray(in, 0, in.length);
+
+//        image.setImageBitmap(bmpout);
+
     }
+
     //button click to open income page
     public void incomePage(View view){
         String input = "Income";

@@ -22,7 +22,7 @@ public class MyDataBase {
         helper.close();
     }
 
-    public long insertData (String user, String input, String name, String type, String amount, String date)
+    public long insertData (String user, String input, String name, String type, String amount, String date,byte[] img)
     {
         SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -32,6 +32,7 @@ public class MyDataBase {
         contentValues.put(Constants.TYPE, type);
         contentValues.put(Constants.AMOUNT, amount);
         contentValues.put(Constants.DATE, date);
+        contentValues.put(Constants.IMAGE, img);
         long id = db.insert(Constants.TABLE_NAME, null, contentValues);
         return id;
     }

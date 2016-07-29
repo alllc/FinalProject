@@ -3,6 +3,8 @@ package com.example.alexliu.finalproject;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * Created by alexliu on 16-07-01.
@@ -94,6 +98,7 @@ public class InputActivity extends AppCompatActivity {
     }
 
 
+
     public void submitButton (View view)
     {
         String input = mInput;
@@ -102,7 +107,9 @@ public class InputActivity extends AppCompatActivity {
         String amount = moneyAmt.getText().toString();
         String date = moneyDate.getText().toString();
         Toast.makeText(this, loginUser + input + name + type + amount + date, Toast.LENGTH_SHORT).show();
-        long id = db.insertData(loginUser, input ,name, type, amount, date);
+
+        byte[] img = image(R.drawable.homegrey1);//测试用图。 应该是在这里改成相机的
+        long id = db.insertData(loginUser, input ,name, type, amount, date, img);
         if (id < 0)
         {
             Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
@@ -117,6 +124,15 @@ public class InputActivity extends AppCompatActivity {
         moneyName.setText("");
         moneyAmt.setText("");
         moneyDate.setText("");
+    }
+    //图片
+    public byte[] image(int id)
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Bitmap bitmap = ((BitmapDrawable) getResources().getDrawable(id)).getBitmap();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        return baos.toByteArray();
+
     }
 
     //button click to open income page
