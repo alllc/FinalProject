@@ -22,6 +22,9 @@ public class SettingActivity extends AppCompatActivity{
         setContentView(R.layout.activity_setting);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.actionbar_setting);
+
     }
 
     public void LogOut (View view){
