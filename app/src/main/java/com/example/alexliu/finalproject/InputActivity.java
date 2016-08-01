@@ -20,6 +20,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by alexliu on 16-07-01.
@@ -33,7 +37,7 @@ public class InputActivity extends AppCompatActivity implements LocationListener
     ArrayAdapter adapterType, adapterincomeType,adapterexpenseType;
     String loginUser;
     public static final String DEFAULT = "not available";
-    String[] incometypedata;
+//    String[] incometypedata;
     byte[] img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +58,21 @@ public class InputActivity extends AppCompatActivity implements LocationListener
         textView = (TextView)findViewById(R.id.textView6);
         db = new MyDataBase(this);
 
-        incometypedata = new String[]{"Interest", "Payment", "Others"};
+//        incometypedata = new String[]{"Interest", "Payment", "Others"};
+
+        Set<String> incometypedata = sharedPrefs.getStringSet(loginUser.toString()+"incomelist",new HashSet<String>());
+        List<String> incomelist = new ArrayList<String>(incometypedata);
+
+        Set<String> expensetypedata = sharedPrefs.getStringSet(loginUser.toString()+"expenselist",new HashSet<String>());
+        List<String> expenselist = new ArrayList<String>(expensetypedata);
 
 
 //        adapterincomeType = ArrayAdapter.createFromResource(this,R.array.income_type,android.R.layout.simple_spinner_dropdown_item);
-        adapterincomeType = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,incometypedata);
+        adapterincomeType = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,incomelist);
         adapterincomeType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        adapterexpenseType = ArrayAdapter.createFromResource(this,R.array.expense_type,android.R.layout.simple_spinner_dropdown_item);
+//        adapterexpenseType = ArrayAdapter.createFromResource(this,R.array.expense_type,android.R.layout.simple_spinner_dropdown_item);
+        adapterexpenseType = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,expenselist);
         adapterexpenseType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         moneyInput.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

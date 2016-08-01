@@ -37,19 +37,36 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
     public void register (View view){
+        List<String> incometypedata = new ArrayList<String>();
+        incometypedata.add("Interest");
+        incometypedata.add("Payment");
+        incometypedata.add("Others");
+
+        List<String> expensetypedata = new ArrayList<String>();
+        expensetypedata.add("Entertainment");
+        expensetypedata.add("Gas");
+        expensetypedata.add("Grocery");
 
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
-        Set<String> set = sharedPrefs.getStringSet("userlist", null);
+        Set<String> set = sharedPrefs.getStringSet("userlist", new HashSet<String>());
+
+        Set<String> typelist1 = new HashSet<String>();
+        typelist1.addAll(incometypedata);
+        Set<String> typelist2 = new HashSet<String>();
+        typelist2.addAll(expensetypedata);
 
         namelist = new ArrayList<>(set);
         namelist.add(usernameEditText.getText().toString());
 
         SharedPreferences.Editor editor = sharedPrefs.edit();
-
         set.addAll(namelist);
         editor.putStringSet("userlist", set);
+        editor.putStringSet(usernameEditText.getText().toString()+"incomelist", typelist1);
+        editor.putStringSet(usernameEditText.getText().toString()+"expenselist", typelist2);
+
         Toast.makeText(this, "Username and password saved to Preferences", Toast.LENGTH_LONG).show();
         editor.commit();
+
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
