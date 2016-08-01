@@ -34,18 +34,20 @@ public class RegisterActivity extends AppCompatActivity {
         usernameEditText = (EditText)findViewById(R.id.userEditText);
         passwordEditText = (EditText)findViewById(R.id.editText);
 
-        List<String> namelist = new ArrayList<String>();
 
     }
     public void register (View view){
-        namelist.add(usernameEditText.getText().toString());
+
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        Set<String> set = sharedPrefs.getStringSet("userlist", null);
+
+        namelist = new ArrayList<>(set);
+        namelist.add(usernameEditText.getText().toString());
+
         SharedPreferences.Editor editor = sharedPrefs.edit();
-        Set<String> set = new HashSet<String>();
+
         set.addAll(namelist);
         editor.putStringSet("userlist", set);
-//        editor.putString("username", usernameEditText.getText().toString());
-//        editor.putString("password", passwordEditText.getText().toString());
         Toast.makeText(this, "Username and password saved to Preferences", Toast.LENGTH_LONG).show();
         editor.commit();
         Intent intent = new Intent(this, LoginActivity.class);

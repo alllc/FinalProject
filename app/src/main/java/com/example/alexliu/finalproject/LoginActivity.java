@@ -45,26 +45,33 @@ public class LoginActivity extends AppCompatActivity{
     public void login(View view) {
 
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
-        String username = sharedPrefs.getString("username", DEFAULT);
-        String password = sharedPrefs.getString("password", DEFAULT);
 
         Set<String> set = sharedPrefs.getStringSet("userlist", null);
-        List<String> list = new ArrayList<String>(set);
 
         u = userEdit.getText().toString();
         p = passwordEdit.getText().toString();
 
-        if (list.contains(u)) {
-            Toast.makeText(this, "Welcome back" + username + " " + password, Toast.LENGTH_LONG).show();
-            String loginU = sharedPrefs.getString("loginUser",DEFAULT);
-            String loginP = sharedPrefs.getString("loginPassword",DEFAULT);
-            if (loginU.equals(DEFAULT) && loginP.equals(DEFAULT)) {
+        if (set != null) {
+            if(set.contains(u)) {
+                Toast.makeText(this, "Welcome back" + u + " " + p, Toast.LENGTH_LONG).show();
+                String loginU = sharedPrefs.getString("loginUser", DEFAULT);
+                String loginP = sharedPrefs.getString("loginPassword", DEFAULT);
+                if (loginU.equals(DEFAULT) && loginP.equals(DEFAULT)) {
+                    SharedPreferences.Editor editor = sharedPrefs.edit();
+                    editor.putString("loginUser", u);
+                    editor.putString("loginPassword", p);
+                    editor.commit();
+                    Intent intent1 = new Intent(this, MainActivity.class);
+                    startActivity(intent1);
+                }
+            }else {
+                Toast.makeText(this, "No data", Toast.LENGTH_LONG).show();
                 SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString("loginUser", u);
-                editor.putString("loginPassword", p);
+                editor.putString("loginUser", DEFAULT);
+                editor.putString("loginPassword", DEFAULT);
                 editor.commit();
-                Intent intent1 = new Intent(this, MainActivity.class);
-                startActivity(intent1);
+                Intent intent = new Intent(this, RegisterActivity.class);
+                startActivity(intent);
             }
         } else {
             Toast.makeText(this, "No data", Toast.LENGTH_LONG).show();
