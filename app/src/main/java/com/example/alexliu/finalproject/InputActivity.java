@@ -213,13 +213,15 @@ public class InputActivity extends AppCompatActivity implements LocationListener
     }
     private void updateLabel() {
 
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "MM/dd/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         moneyDate.setText(sdf.format(myCalendar.getTime()));
         String m = moneyDate.getText().toString();
         MM = m.substring(0,2);
-        textView.setText("The type u choice is：" + mInput + " " + mType +" "+ MM);
+        DD = m.substring(3,5);
+        YYYY = m.substring(6,10);
+        textView.setText("The type u choice is：" + mInput + " " + mType +" "+ MM+"/"+DD+"/"+YYYY);
 
     }
 
