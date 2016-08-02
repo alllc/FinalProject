@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
@@ -126,8 +127,9 @@ public class InputActivity extends AppCompatActivity implements LocationListener
 //
 //            }
 //        };
-//        moneyDate.addTextChangedListener(tw);
-
+//        moneyDate.addTextChangedListener(tw
+        InputFilter[] filters = {new CashierInputFilter()};
+        moneyAmt.setFilters(filters);
         moneyDate.setInputType(InputType.TYPE_NULL);
         myCalendar = Calendar.getInstance();
 
