@@ -51,6 +51,7 @@ public class InputActivity extends AppCompatActivity implements LocationListener
     byte[] img;
     Calendar myCalendar;
     DatePickerDialog.OnDateSetListener date;
+    String MM,DD,YYYY;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -192,7 +193,7 @@ public class InputActivity extends AppCompatActivity implements LocationListener
                     moneyType.setAdapter(adapterexpenseType);
                     adapterType = adapterexpenseType;
                 }
-                textView.setText("The type u choice is：" + m[position]);//显示
+//                textView.setText("The type u choice is：" + m[position]);//显示
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -216,6 +217,10 @@ public class InputActivity extends AppCompatActivity implements LocationListener
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         moneyDate.setText(sdf.format(myCalendar.getTime()));
+        String m = moneyDate.getText().toString();
+        MM = m.substring(0,2);
+        textView.setText("The type u choice is：" + mInput + " " + mType +" "+ MM);
+
     }
 
 
@@ -224,7 +229,7 @@ public class InputActivity extends AppCompatActivity implements LocationListener
                                    long id) {
             mType = adapterType.getItem(position).toString();
 //            textView.setText("The type u choice is：" + mInput + " " + mType);
-            textView.setText(img.toString());
+//            textView.setText(img.toString());
         }
         public void onNothingSelected(AdapterView<?> arg0) {
 
