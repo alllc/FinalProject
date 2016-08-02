@@ -15,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
     public static final String DEFAULT = "not available";
     TextView incomeNumTxt, expenseNumTxt, resultNumTxt;
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     Cursor c_income, c_expense;
     int sum_income, sum_expense, total;
     String loginUser;
-
+    TextView monthView;
 
 //    int sum = c.getInt(c.getColumnIndex("sum"));
 
@@ -40,8 +42,16 @@ public class MainActivity extends AppCompatActivity {
         incomeNumTxt = (TextView)findViewById(R.id.incomeNumTxt);
         expenseNumTxt = (TextView)findViewById(R.id.expenseNumTxt);
         resultNumTxt = (TextView)findViewById(R.id.resultNumTxt);
+        monthView = (TextView)findViewById(R.id.MonthView);
         db = new MyDataBase(this);
 
+        Calendar c = Calendar.getInstance();
+//        year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        String[] monthcal = {"January","February","March","April","May","June","July","August","September","October","November","December"};
+        monthView.setText(monthcal[month-1]);
+
+//        day = c.get(Calendar.DAY_OF_MONTH);
         //check if there is a data
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         String loginUser = sharedPrefs.getString("loginUser", DEFAULT);

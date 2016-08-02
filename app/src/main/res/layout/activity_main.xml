@@ -7,15 +7,27 @@
     tools:context="com.example.alexliu.finalproject.MainActivity"
     android:background="#FFFFFF">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/MonthView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textSize="30dp"
+        android:layout_alignParentEnd="true"
+        android:background="#66f0f6"
+        android:padding="20dp" />
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentTop="true"
         android:padding="20dp"
-        android:id="@+id/tableLayout">
+        android:id="@+id/tableLayout"
+        android:layout_below="@+id/MonthView"
+        android:layout_alignParentStart="true">
 
         <TableRow
             android:layout_width="match_parent"
