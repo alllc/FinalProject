@@ -40,10 +40,10 @@ public class TypeEditActivity extends AppCompatActivity{
         thost.setOnTabChangedListener(new TabHost.OnTabChangeListener(){
             @Override
             public void onTabChanged(String tabId) {
-                if (tabId.equals("tab1")) {   //第一个标签
+                if (tabId.equals("tab1")) {
                     Toast.makeText(TypeEditActivity.this, "Income", Toast.LENGTH_SHORT).show();
                 }
-                if (tabId.equals("tab2")) {   //第二个标签
+                if (tabId.equals("tab2")) {
                     Toast.makeText(TypeEditActivity.this, "Expense", Toast.LENGTH_SHORT).show();
                 }
             }
