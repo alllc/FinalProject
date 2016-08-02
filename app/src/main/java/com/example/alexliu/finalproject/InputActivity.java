@@ -1,6 +1,8 @@
 package com.example.alexliu.finalproject;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -12,20 +14,24 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 /**
@@ -42,6 +48,8 @@ public class InputActivity extends AppCompatActivity implements LocationListener
     public static final String DEFAULT = "not available";
 //    String[] incometypedata;
     byte[] img;
+    Calendar myCalendar;
+    DatePickerDialog.OnDateSetListener date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,67 +66,95 @@ public class InputActivity extends AppCompatActivity implements LocationListener
         moneyType = (Spinner)findViewById(R.id.typeSpinner);
         moneyAmt = (EditText)findViewById(R.id.amountEditTxt);
         moneyDate = (EditText)findViewById(R.id.dateEditTxt);
-        //limit input format ( still has bug)
-        TextWatcher tw = new TextWatcher() {
-            private String current = "";
-            private String ddmmyyyy = "DDMMYYYY";
-            private Calendar cal = Calendar.getInstance();
+//        //limit input format ( still has bug)
+//        TextWatcher tw = new TextWatcher() {
+//            private String current = "";
+//            private String ddmmyyyy = "DDMMYYYY";
+//            private Calendar cal = Calendar.getInstance();
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                if (!s.toString().equals(current)) {
+//                    String clean = s.toString().replaceAll("[^\\d.]", "");
+//                    String cleanC = current.replaceAll("[^\\d.]", "");
+//
+//                    int cl = clean.length();
+//                    int sel = cl;
+//                    for (int i = 2; i <= cl && i < 6; i += 2) {
+//                        sel++;
+//                    }
+//                    //Fix for pressing delete next to a forward slash
+//                    if (clean.equals(cleanC)) sel--;
+//
+//                    if (clean.length() < 8){
+//                        clean = clean + ddmmyyyy.substring(clean.length());
+//                    }else{
+//                        //This part makes sure that when we finish entering numbers
+//                        //the date is correct, fixing it otherwise
+//                        int day  = Integer.parseInt(clean.substring(0,2));
+//                        int mon  = Integer.parseInt(clean.substring(2,4));
+//                        int year = Integer.parseInt(clean.substring(4,8));
+//
+//                        if(mon > 12) mon = 12;
+//                        cal.set(Calendar.MONTH, mon-1);
+//                        year = (year<1900)?1900:(year>2100)?2100:year;
+//                        cal.set(Calendar.YEAR, year);
+//                        // ^ first set year for the line below to work correctly
+//                        //with leap years - otherwise, date e.g. 29/02/2012
+//                        //would be automatically corrected to 28/02/2012
+//
+//                        day = (day > cal.getActualMaximum(Calendar.DATE))? cal.getActualMaximum(Calendar.DATE):day;
+//                        clean = String.format("%02d%02d%02d",day, mon, year);
+//                    }
+//
+//                    clean = String.format("%s/%s/%s", clean.substring(0, 2),
+//                            clean.substring(2, 4),
+//                            clean.substring(4, 8));
+//
+//                    sel = sel < 0 ? 0 : sel;
+//                    current = clean;
+//                    moneyDate.setText(current);
+//                    moneyDate.setSelection(sel < current.length() ? sel : current.length());
+//                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        };
+//        moneyDate.addTextChangedListener(tw);
+
+        moneyDate.setInputType(InputType.TYPE_NULL);
+        myCalendar = Calendar.getInstance();
+
+
+        date = new DatePickerDialog.OnDateSetListener() {
+
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().equals(current)) {
-                    String clean = s.toString().replaceAll("[^\\d.]", "");
-                    String cleanC = current.replaceAll("[^\\d.]", "");
-
-                    int cl = clean.length();
-                    int sel = cl;
-                    for (int i = 2; i <= cl && i < 6; i += 2) {
-                        sel++;
-                    }
-                    //Fix for pressing delete next to a forward slash
-                    if (clean.equals(cleanC)) sel--;
-
-                    if (clean.length() < 8){
-                        clean = clean + ddmmyyyy.substring(clean.length());
-                    }else{
-                        //This part makes sure that when we finish entering numbers
-                        //the date is correct, fixing it otherwise
-                        int day  = Integer.parseInt(clean.substring(0,2));
-                        int mon  = Integer.parseInt(clean.substring(2,4));
-                        int year = Integer.parseInt(clean.substring(4,8));
-
-                        if(mon > 12) mon = 12;
-                        cal.set(Calendar.MONTH, mon-1);
-                        year = (year<1900)?1900:(year>2100)?2100:year;
-                        cal.set(Calendar.YEAR, year);
-                        // ^ first set year for the line below to work correctly
-                        //with leap years - otherwise, date e.g. 29/02/2012
-                        //would be automatically corrected to 28/02/2012
-
-                        day = (day > cal.getActualMaximum(Calendar.DATE))? cal.getActualMaximum(Calendar.DATE):day;
-                        clean = String.format("%02d%02d%02d",day, mon, year);
-                    }
-
-                    clean = String.format("%s/%s/%s", clean.substring(0, 2),
-                            clean.substring(2, 4),
-                            clean.substring(4, 8));
-
-                    sel = sel < 0 ? 0 : sel;
-                    current = clean;
-                    moneyDate.setText(current);
-                    moneyDate.setSelection(sel < current.length() ? sel : current.length());
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
             }
         };
-        moneyDate.addTextChangedListener(tw);
+        moneyDate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(InputActivity.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
         textView = (TextView)findViewById(R.id.textView6);
         db = new MyDataBase(this);
 
@@ -172,7 +208,13 @@ public class InputActivity extends AppCompatActivity implements LocationListener
 
 
     }
+    private void updateLabel() {
 
+        String myFormat = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        moneyDate.setText(sdf.format(myCalendar.getTime()));
+    }
 
 
     class SpinnerXMLSelectedListener implements AdapterView.OnItemSelectedListener {
