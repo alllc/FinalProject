@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="expense_type">
-        <item>Entertainment</item>
-        <item>Gas</item>
-        <item>Grocery</item>
-    </string-array>
-</resources>
