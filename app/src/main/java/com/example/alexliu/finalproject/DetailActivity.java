@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Calendar;
+
 /**
  * Created by alexliu on 16-07-01.
  */
@@ -35,6 +37,9 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.actionbar_details);
 
         db = new MyDataBase(this);
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
 
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         loginUser = sharedPrefs.getString("loginUser", DEFAULT);
@@ -46,7 +51,7 @@ public class DetailActivity extends AppCompatActivity {
         if(b!=null){
             input = (String) b.get("INPUT");
             pos = (String) b.get("POS");
-            cursor = db.getSelectedData(input,loginUser);
+            cursor = db.getSelectedData(input,loginUser,Integer.toString(month+1),Integer.toString(year));
         }
         inputTxt = (TextView)findViewById(R.id.InputType);
         nameTxt = (TextView)findViewById(R.id.Name);

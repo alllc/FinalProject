@@ -46,12 +46,13 @@ public class MainActivity extends AppCompatActivity {
 
         monthView = (TextView)findViewById(R.id.MonthView);
         Calendar c = Calendar.getInstance();
-//        year = c.get(Calendar.YEAR);
+        int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         String[] monthcal = {"January","February","March","April","May","June","July","August","September","October","November","December"};
-        monthView.setText(monthcal[month-1]);
+        monthView.setText(monthcal[month]);
 
 //        day = c.get(Calendar.DAY_OF_MONTH);
+
         //check if there is a data
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         String loginUser = sharedPrefs.getString("loginUser", DEFAULT);
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        c_income = db.query_income(loginUser);
+        c_income = db.query_income(loginUser,Integer.toString(month+1),Integer.toString(year));
         if (c_income != null && c_income.getCount() > 0) {
             if (c_income.moveToFirst()){
                 sum_income = c_income.getInt(0);

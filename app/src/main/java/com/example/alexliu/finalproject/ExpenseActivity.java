@@ -42,10 +42,10 @@ public class ExpenseActivity extends AppCompatActivity implements AdapterView.On
 
         monthView = (TextView)findViewById(R.id.MonthView);
         Calendar c = Calendar.getInstance();
-//        year = c.get(Calendar.YEAR);
+        int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         String[] monthcal = {"January","February","March","April","May","June","July","August","September","October","November","December"};
-        monthView.setText(monthcal[month-1]);
+        monthView.setText(monthcal[month]);
 
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         String loginUser = sharedPrefs.getString("loginUser", DEFAULT);
@@ -54,7 +54,7 @@ public class ExpenseActivity extends AppCompatActivity implements AdapterView.On
 
         if(intent. hasExtra("query")){
             queryResult = intent.getStringExtra("query");
-            cursor = db.getSelectedData(queryResult,loginUser);
+            cursor = db.getSelectedData(queryResult,loginUser,Integer.toString(month+1),Integer.toString(year));
         } else {
             cursor = db.getData();
         }

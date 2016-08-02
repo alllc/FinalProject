@@ -218,7 +218,7 @@ public class InputActivity extends AppCompatActivity implements LocationListener
 
         moneyDate.setText(sdf.format(myCalendar.getTime()));
         String m = moneyDate.getText().toString();
-        MM = m.substring(0,2);
+        MM = m.substring(1,2);
         DD = m.substring(3,5);
         YYYY = m.substring(6,10);
         textView.setText("The type u choice is：" + mInput + " " + mType +" "+ MM+"/"+DD+"/"+YYYY);
@@ -251,7 +251,7 @@ public class InputActivity extends AppCompatActivity implements LocationListener
         Toast.makeText(this, loginUser + input + name + type + amount + date, Toast.LENGTH_SHORT).show();
 
 
-        long id = db.insertData(loginUser, input ,name, type, amount, date, img);
+        long id = db.insertData(loginUser, input ,name, type, amount, date, MM,DD,YYYY, img);
         if (id < 0)
         {
             Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();

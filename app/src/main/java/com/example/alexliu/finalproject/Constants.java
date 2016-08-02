@@ -13,6 +13,9 @@ public class Constants {
     public static final String TYPE = "Type";
     public static final String AMOUNT = "Amount";
     public static final String DATE = "Date";
+    public static final String MONTH = "Month";
+    public static final String DAY = "Day";
+    public static final String YEAR = "Year";
     public static final String IMAGE = "Image";
-    public static final int DATABASE_VERSION = 22;
+    public static final int DATABASE_VERSION = 25;
 }
