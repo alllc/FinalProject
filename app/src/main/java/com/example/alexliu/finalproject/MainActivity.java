@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
         incomeNumTxt = (TextView)findViewById(R.id.incomeNumTxt);
         expenseNumTxt = (TextView)findViewById(R.id.expenseNumTxt);
         resultNumTxt = (TextView)findViewById(R.id.resultNumTxt);
-        monthView = (TextView)findViewById(R.id.MonthView);
         db = new MyDataBase(this);
 
+        monthView = (TextView)findViewById(R.id.MonthView);
         Calendar c = Calendar.getInstance();
 //        year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);

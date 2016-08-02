@@ -16,6 +16,8 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 /**
  * Created by alexliu on 16-07-01.
  */
@@ -27,6 +29,7 @@ public class IncomeActivity extends AppCompatActivity implements AdapterView.OnI
     public static final String DEFAULT = "not available";
     String name,type,amount,date;
     Cursor cursor ;
+    TextView monthView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +41,13 @@ public class IncomeActivity extends AppCompatActivity implements AdapterView.OnI
 
         myList = (ListView)findViewById(R.id.listView);
         db = new MyDataBase(this);
+
+        monthView = (TextView)findViewById(R.id.MonthView);
+        Calendar c = Calendar.getInstance();
+//        year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        String[] monthcal = {"January","February","March","April","May","June","July","August","September","October","November","December"};
+        monthView.setText(monthcal[month-1]);
 
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         String loginUser = sharedPrefs.getString("loginUser", DEFAULT);
