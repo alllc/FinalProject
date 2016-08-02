@@ -51,6 +51,7 @@
             android:name=".TypeEditActivity"
             android:label="@string/typeedit_page">
         </activity>
+
     </application>
 
 </manifest>

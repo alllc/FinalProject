@@ -4,7 +4,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.alexliu.finalproject.TypeEditActivity"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:id="@+id/tab02">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -102,4 +103,5 @@
             android:background="@color/colorPrimary"
             android:textColor="@color/colorWhite"/>
     </TableLayout>
+
 </RelativeLayout>
