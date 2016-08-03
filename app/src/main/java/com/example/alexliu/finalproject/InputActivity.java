@@ -187,7 +187,7 @@ public class InputActivity extends AppCompatActivity implements LocationListener
         MM = m.substring(0,2);
         DD = m.substring(3,5);
         YYYY = m.substring(6,10);
-        textView.setText("The type u choice is：" + mInput + " " + mType +" "+ MM+"/"+DD+"/"+YYYY);
+        //textView.setText("The type u choice is：" + mInput + " " + mType +" "+ MM+"/"+DD+"/"+YYYY);
 
     }
 

@@ -32,7 +32,6 @@ public class LoginActivity extends AppCompatActivity{
         setContentView(R.layout.activity_login);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        testing = (TextView)findViewById(R.id.textView11);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.actionbar_login);

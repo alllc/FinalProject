@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         barChart.setNoDataTextDescription("You need to provide data for the chart.");
 
         barChart.setDrawGridBackground(false); // 是否显示表格颜色
-//        barChart.setGridBackgroundColor(Color.WHITE & 0x70FFFFFF); // 表格的的颜色，在这里是是给颜色设置一个透明度
+        //barChart.setGridBackgroundColor(Color.WHITE & 0x70FFFFFF); // 表格的的颜色，在这里是是给颜色设置一个透明度
 
         barChart.setTouchEnabled(true); // 设置是否可以触摸
 
@@ -134,8 +134,10 @@ public class MainActivity extends AppCompatActivity {
         Legend mLegend = barChart.getLegend(); // 设置比例图标示
 
         mLegend.setForm(Legend.LegendForm.CIRCLE);// 样式
-        mLegend.setFormSize(6f);// 字体
-        mLegend.setTextColor(Color.BLACK);// 颜色
+        mLegend.setFormSize(5.5f);// 字体
+
+        int tColor = getResources().getColor(R.color.colorGrey);
+        mLegend.setTextColor(tColor);// 颜色
 
 
         barChart.animateX(2500); // 立即执行的动画,x轴
@@ -149,15 +151,14 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<BarEntry> yValues = new ArrayList<BarEntry>();
 
-
         yValues.add(new BarEntry(sum_income, 0));
         yValues.add(new BarEntry(sum_expense, 1));
-
 
         // y轴的数据集合
         BarDataSet barDataSet = new BarDataSet(yValues, "DATA RESULT");
 
-        barDataSet.setColor(Color.rgb(114, 188, 223));
+        int myColor = getResources().getColor(R.color.colorPrimary);
+        barDataSet.setColor(myColor);
 
         ArrayList<BarDataSet> barDataSets = new ArrayList<BarDataSet>();
         barDataSets.add(barDataSet); // add the datasets

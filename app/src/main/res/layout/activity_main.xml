@@ -181,11 +181,13 @@
         </FrameLayout>
 
     </TableLayout>
+
     <com.github.mikephil.charting.charts.BarChart
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/spread_bar_chart"
         android:layout_above="@+id/tableLayout6"
+        android:layout_margin="30dp"
         android:layout_below="@+id/tableLayout" />
 
 </RelativeLayout>

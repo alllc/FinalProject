@@ -31,7 +31,7 @@
         android:layout_height="match_parent"
         android:text="New Text"
         android:id="@+id/amountEntry"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:gravity="bottom|right"
         android:textSize="18sp"/>
 
