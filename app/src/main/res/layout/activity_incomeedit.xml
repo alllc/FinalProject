@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="121dp"
         android:id="@+id/listView2"
-        android:layout_above="@+id/tableRow"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/tableRow" />
 
     <TableRow
         android:layout_width="match_parent"
@@ -25,7 +25,8 @@
             android:layout_height="match_parent"
             android:text="ADD"
             android:id="@+id/button5"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="Add" />
 
         <Button
             android:layout_width="fill_parent"

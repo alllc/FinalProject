@@ -55,7 +55,10 @@
             android:name=".PreviousActivity"
             android:label="@string/previous_page">
         </activity>
-
+        <activity
+            android:name=".AddActivity"
+            android:label="@string/adding_page">
+        </activity>
     </application>
 
 </manifest>

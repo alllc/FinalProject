@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:id="@+id/tableLayout5">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -83,49 +84,25 @@
 
     </TableLayout>
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="20dp"
-        android:orientation="vertical">
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Put in type name"
+        android:ems="10"
+        android:id="@+id/tyname"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="128dp" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Previous Month"
-            android:id="@+id/button4"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:onClick="Previous"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/colorWhite"
-            android:nestedScrollingEnabled="true"
-            android:layout_marginTop="50dp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD"
+        android:id="@+id/button7"
+        android:layout_weight="1"
+        android:onClick="Add"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Editing Type"
-            android:id="@+id/button3"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:onClick="TypeEdit"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/colorWhite"
-            android:nestedScrollingEnabled="true" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Log out"
-            android:id="@+id/button"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:onClick="LogOut"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/colorWhite"/>
-
-    </TableLayout>
 </RelativeLayout>
