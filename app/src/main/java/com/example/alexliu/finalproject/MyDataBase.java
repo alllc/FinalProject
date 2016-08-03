@@ -22,7 +22,8 @@ public class MyDataBase {
         helper.close();
     }
 
-    public long insertData (String user, String input, String name, String type, String amount, String date,String month, String day, String year, byte[] img)
+    public long insertData (String user, String input, String name, String type,
+                            String amount, String date,String month, String day, String year, byte[] img)
     {
         SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -65,13 +66,15 @@ public class MyDataBase {
 
     public Cursor query_income(String user, String month, String year){
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT SUM(Amount) FROM PLANTSTABLE WHERE Input ='Income' and User ='" + user +"' and Month ='"+month+"' and Year ='"+year+"'", null);
+        Cursor cursor = db.rawQuery("SELECT SUM(Amount) FROM PLANTSTABLE WHERE Input ='Income' and User ='" + user
+                +"' and Month ='"+month+"' and Year ='"+year+"'", null);
         return cursor;
     }
 
     public Cursor query_expense(String user, String month, String year){
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT SUM(Amount) FROM PLANTSTABLE WHERE Input ='Expense' and User ='" + user + "' and Month ='"+month+"' and Year ='"+year+"'", null);
+        Cursor cursor = db.rawQuery("SELECT SUM(Amount) FROM PLANTSTABLE WHERE Input ='Expense' and User ='" + user
+                + "' and Month ='"+month+"' and Year ='"+year+"'", null);
         return cursor;
     }
 }

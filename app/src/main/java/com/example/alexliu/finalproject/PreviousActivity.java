@@ -26,7 +26,7 @@ public class PreviousActivity extends AppCompatActivity{
     TextView incomeNumTxt, expenseNumTxt, resultNumTxt;
     MyDataBase db;
     Cursor c_income, c_expense;
-    int sum_income, sum_expense, total;
+    double sum_income, sum_expense, total;
     EditText checkM, checkY;
     TextView monthView;
     String monthinput;
@@ -79,7 +79,7 @@ public class PreviousActivity extends AppCompatActivity{
         c_income = db.query_income(loginUser,checkM.getText().toString(),checkY.getText().toString());
         if (c_income != null && c_income.getCount() > 0) {
             if (c_income.moveToFirst()){
-                sum_income = c_income.getInt(0);
+                sum_income = c_income.getDouble(0);
             }else {
                 sum_income = -1;
             }
@@ -91,7 +91,7 @@ public class PreviousActivity extends AppCompatActivity{
         c_expense = db.query_expense(loginUser,checkM.getText().toString(),checkY.getText().toString());
         if (c_expense != null && c_expense.getCount() > 0) {
             if (c_expense.moveToFirst()){
-                sum_expense = c_expense.getInt(0);
+                sum_expense = c_expense.getDouble(0);
             }else {
                 sum_expense = -1;
             }

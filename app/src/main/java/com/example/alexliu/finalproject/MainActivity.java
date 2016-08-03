@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     TextView incomeNumTxt, expenseNumTxt, resultNumTxt;
     MyDataBase db;
     Cursor c_income, c_expense;
-    double sum_income, sum_expense, total;
+    float sum_income, sum_expense, total;
     String loginUser;
     TextView monthView;
     String monthinput;
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         c_income = db.query_income(loginUser,monthinput,Integer.toString(year));
         if (c_income != null && c_income.getCount() > 0) {
             if (c_income.moveToFirst()){
-                sum_income = c_income.getInt(0);
+                sum_income = c_income.getFloat(0);
             }else {
                 sum_income = -1;
             }
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         c_expense = db.query_expense(loginUser,monthinput,Integer.toString(year));
         if (c_expense != null && c_expense.getCount() > 0) {
             if (c_expense.moveToFirst()){
-                sum_expense = c_expense.getInt(0);
+                sum_expense = c_expense.getFloat(0);
             }else {
                 sum_expense = -1;
             }
