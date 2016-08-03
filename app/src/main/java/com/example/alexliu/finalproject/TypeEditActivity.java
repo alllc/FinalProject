@@ -39,7 +39,7 @@ public class TypeEditActivity extends FragmentActivity implements View.OnClickLi
 //        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 //        getSupportActionBar().setCustomView(R.layout.actionbar_setting);
 
-
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         initView();
         initEvent();
         setSelect(0);
@@ -66,8 +66,8 @@ public class TypeEditActivity extends FragmentActivity implements View.OnClickLi
      * 将tab 的text 初始化
      */
     public void reset() {
-        t1.setText("标题1");
-        t2.setText("标题2");
+        t1.setText("Income");
+        t2.setText("Expense");
 
     }
 
@@ -89,7 +89,8 @@ public class TypeEditActivity extends FragmentActivity implements View.OnClickLi
                 {
                     trs.show(tab1);
                 }
-                t1.setText("选中");
+//                t1.setText("选中");
+
                 break;
             case 1:
                 if(tab2==null)
@@ -100,7 +101,7 @@ public class TypeEditActivity extends FragmentActivity implements View.OnClickLi
                 {
                     trs.show(tab2);
                 }
-                t2.setText("选中");
+//                t2.setText("选中");
                 break;
 
 
