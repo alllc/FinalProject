@@ -49,7 +49,7 @@ public class Fragment2 extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "点击了我!!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "点击了我!!", Toast.LENGTH_SHORT).show();
                 Intent intent= new Intent(getActivity(),AddActivity2.class);
                 startActivity(intent);
             }
