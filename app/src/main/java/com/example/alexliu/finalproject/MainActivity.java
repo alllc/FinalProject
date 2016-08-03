@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     int sum_income, sum_expense, total;
     String loginUser;
     TextView monthView;
-
+    String monthinput;
 //    int sum = c.getInt(c.getColumnIndex("sum"));
 
 
@@ -64,9 +64,13 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
+        if(month <= 9){
+            monthinput = "0" + Integer.toString(month+1);
+        }else{
+            monthinput = Integer.toString(month+1);
+        }
 
-
-        c_income = db.query_income(loginUser,Integer.toString(month+1),Integer.toString(year));
+        c_income = db.query_income(loginUser,monthinput,Integer.toString(year));
         if (c_income != null && c_income.getCount() > 0) {
             if (c_income.moveToFirst()){
                 sum_income = c_income.getInt(0);
