@@ -29,6 +29,7 @@ public class DetailActivity extends AppCompatActivity {
     ImageView image;
     String loginUser;
     String monthinput;
+    Bitmap bitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,8 +80,12 @@ public class DetailActivity extends AppCompatActivity {
         dateTxt.setText(date);
 
         byte[] blob = cursor.getBlob(cursor.getColumnIndex(Constants.IMAGE));
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(blob);
-        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+        if(blob == null){
+            bitmap = null;
+        }else {
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(blob);
+            bitmap = BitmapFactory.decodeStream(inputStream);
+        }
 
         //Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         ImageView image = (ImageView) findViewById(R.id.img);
