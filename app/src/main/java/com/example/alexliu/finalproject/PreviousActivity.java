@@ -47,7 +47,7 @@ public class PreviousActivity extends AppCompatActivity{
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.actionbar_setting);
+        getSupportActionBar().setCustomView(R.layout.actionbar_pre);
 
         incomeNumTxt = (TextView)findViewById(R.id.incomeNumTxt);
         expenseNumTxt = (TextView)findViewById(R.id.expenseNumTxt);
