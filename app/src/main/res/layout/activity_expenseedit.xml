@@ -11,7 +11,7 @@
         android:layout_height="121dp"
         android:id="@+id/listView2"
         android:layout_alignParentTop="true"
-        android:layout_above="@+id/tyname" />
+        android:layout_above="@+id/tableRow" />
 
     <TableRow
         android:layout_width="match_parent"
@@ -35,16 +35,5 @@
             android:id="@+id/button6"
             android:layout_weight="1" />
     </TableRow>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Put in type name"
-        android:ems="10"
-        android:id="@+id/tyname"
-        android:layout_above="@+id/tableRow"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

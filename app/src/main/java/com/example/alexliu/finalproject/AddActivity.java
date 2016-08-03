@@ -51,7 +51,6 @@ public class AddActivity extends AppCompatActivity {
 
         editor.putStringSet(loginUser.toString()+"incomelist", typelist1);
 
-        Toast.makeText(this, "Username and password saved to Preferences", Toast.LENGTH_LONG).show();
         editor.commit();
         Intent intent = new Intent(this, TypeEditActivity.class);
         startActivity(intent);

@@ -1,6 +1,7 @@
 package com.example.alexliu.finalproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -40,6 +41,15 @@ public class Fragment2 extends Fragment {
 
 
         incomelist.setAdapter(new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1,list));
+        Button button=(Button)tab2view.findViewById(R.id.button5);
+        button.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "点击了我!!", Toast.LENGTH_SHORT).show();
+                Intent intent= new Intent(getActivity(),AddActivity2.class);
+                startActivity(intent);
+            }
+        });
     }
 }

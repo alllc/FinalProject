@@ -41,18 +41,19 @@ public class AddActivity2 extends AppCompatActivity {
         Toast.makeText(this, "New type has been added", Toast.LENGTH_SHORT).show();
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         loginUser = sharedPrefs.getString("loginUser", DEFAULT);
-        Set<String> incometypedata = sharedPrefs.getStringSet(loginUser.toString()+"incomelist",new HashSet<String>());
-        List<String> list = new ArrayList<String>(incometypedata);
+        Set<String> expensetypedata = sharedPrefs.getStringSet(loginUser.toString()+"expenselist",new HashSet<String>());
+        List<String> list = new ArrayList<String>(expensetypedata);
 
         Set<String> typelist1 = new HashSet<String>();
         typelist1.addAll(list);
         typelist1.add(tyname.getText().toString());
         SharedPreferences.Editor editor = sharedPrefs.edit();
 
-        editor.putStringSet(loginUser.toString()+"incomelist", typelist1);
+        editor.putStringSet(loginUser.toString()+"expenselist", typelist1);
 
-        Toast.makeText(this, "Username and password saved to Preferences", Toast.LENGTH_LONG).show();
         editor.commit();
+        Toast.makeText(this, "Username and password saved to Preferences", Toast.LENGTH_LONG).show();
+
         Intent intent = new Intent(this, TypeEditActivity.class);
         startActivity(intent);
     }

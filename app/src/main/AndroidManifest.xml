@@ -59,6 +59,10 @@
             android:name=".AddActivity"
             android:label="@string/adding_page">
         </activity>
+        <activity
+            android:name=".AddActivity2"
+            android:label="@string/adding_page">
+        </activity>
     </application>
 
 </manifest>
