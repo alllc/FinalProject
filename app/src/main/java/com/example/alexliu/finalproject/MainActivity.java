@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     TextView incomeNumTxt, expenseNumTxt, resultNumTxt;
     MyDataBase db;
     Cursor c_income, c_expense;
-    int sum_income, sum_expense, total;
+    double sum_income, sum_expense, total;
     String loginUser;
     TextView monthView;
     String monthinput;

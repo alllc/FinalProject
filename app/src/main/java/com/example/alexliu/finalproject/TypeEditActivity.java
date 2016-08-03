@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -45,40 +46,29 @@ public class TypeEditActivity extends FragmentActivity implements View.OnClickLi
         setSelect(0);
 
     }
-    /*
- * 初始化点击
- */
+
     private void initEvent() {
-        // TODO Auto-generated method stub
         t1.setOnClickListener(this);
         t2.setOnClickListener(this);
-
     }
-    //初始化
+
     private void initView() {
         t1 = (TextView) findViewById(R.id.text1);
         t2 = (TextView) findViewById(R.id.text2);
-
-
     }
 
-    /**
-     * 将tab 的text 初始化
-     */
     public void reset() {
         t1.setText("Income");
+
         t2.setText("Expense");
 
     }
 
-    //设置Fragment内容区域
     private void setSelect(int i) {
         FragmentManager fm=getSupportFragmentManager();
         FragmentTransaction trs=fm.beginTransaction();
-        //隐藏Fragment
         hideFragment(trs);
 
-        // 把text 切换为选中
         switch (i) {
             case 0:
                 if(tab1==null)
@@ -89,8 +79,9 @@ public class TypeEditActivity extends FragmentActivity implements View.OnClickLi
                 {
                     trs.show(tab1);
                 }
-//                t1.setText("选中");
-
+                t1.setText("Selected");
+                t1.setTextColor(Color.parseColor("#9AEAED"));
+                t2.setTextColor(Color.parseColor("#979797"));
                 break;
             case 1:
                 if(tab2==null)
@@ -101,7 +92,10 @@ public class TypeEditActivity extends FragmentActivity implements View.OnClickLi
                 {
                     trs.show(tab2);
                 }
-//                t2.setText("选中");
+                t2.setText("Selected");
+                t1.setTextColor(Color.parseColor("#979797"));
+                t2.setTextColor(Color.parseColor("#9AEAED"));
+
                 break;
 
 
@@ -110,9 +104,7 @@ public class TypeEditActivity extends FragmentActivity implements View.OnClickLi
         }
         trs.commit();
     }
-    /*
-     * 隐藏所有的Fragment
-     */
+
     private void hideFragment(FragmentTransaction trs) {
 
         if(tab1!=null)
