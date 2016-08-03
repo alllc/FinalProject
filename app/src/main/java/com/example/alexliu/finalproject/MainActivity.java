@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         }else {
             sum_expense = -2;
         }
-        expenseNumTxt.setText(" $ "+sum_expense);
+        expenseNumTxt.setText(" $－"+sum_expense);
 
         total = sum_income - sum_expense;
         resultNumTxt.setText(" $ "+total);
