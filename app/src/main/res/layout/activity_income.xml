@@ -84,15 +84,13 @@
     </TableLayout>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/MonthView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:textSize="30dp"
-        android:layout_alignParentEnd="true"
-        android:background="#66f0f6"
+        android:textSize="20dp"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorLightGrey"
         android:paddingLeft="20dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp" />
