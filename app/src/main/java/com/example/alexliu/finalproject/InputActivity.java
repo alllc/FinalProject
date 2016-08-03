@@ -218,7 +218,7 @@ public class InputActivity extends AppCompatActivity implements LocationListener
 
         moneyDate.setText(sdf.format(myCalendar.getTime()));
         String m = moneyDate.getText().toString();
-        MM = m.substring(1,2);
+        MM = m.substring(0,2);
         DD = m.substring(3,5);
         YYYY = m.substring(6,10);
         textView.setText("The type u choice is：" + mInput + " " + mType +" "+ MM+"/"+DD+"/"+YYYY);

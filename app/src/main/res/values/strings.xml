@@ -10,4 +10,5 @@
     <string name="expense_page">Expense</string>
     <string name="typeedit_page">Type Editing</string>
     <string name="location_page">Location</string>
+    <string name="previous_page">Previous</string>
 </resources>

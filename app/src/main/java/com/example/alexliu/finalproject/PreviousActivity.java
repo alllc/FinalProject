@@ -4,13 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 
 /**
@@ -18,47 +23,85 @@ import android.widget.Toast;
  */
 public class PreviousActivity extends AppCompatActivity{
     public static final String DEFAULT = "not available";
+    TextView incomeNumTxt, expenseNumTxt, resultNumTxt;
+    MyDataBase db;
+    Cursor c_income, c_expense;
+    int sum_income, sum_expense, total;
+    EditText checkM, checkY;
+    TextView monthView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_typeedit);
+        setContentView(R.layout.activity_preivous);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.actionbar_setting);
 
-        TabHost thost = (TabHost) findViewById(R.id.tabhost);
-        thost.setup();
+        incomeNumTxt = (TextView)findViewById(R.id.incomeNumTxt);
+        expenseNumTxt = (TextView)findViewById(R.id.expenseNumTxt);
+        resultNumTxt = (TextView)findViewById(R.id.resultNumTxt);
 
-        LayoutInflater.from(this).inflate(R.layout.activity_incomeedit, thost.getTabContentView());
-        LayoutInflater.from(this).inflate(R.layout.activity_expenseedit, thost.getTabContentView());
+        checkM = (EditText)findViewById(R.id.checkMonthEdit);
+        checkY = (EditText)findViewById(R.id.checkYearEdit);
 
-        thost.addTab(thost.newTabSpec("tab1").setIndicator("Income").setContent(R.id.tab01));
-        thost.addTab(thost.newTabSpec("tab2").setIndicator("Expense").setContent(R.id.tab02));
 
-        thost.setOnTabChangedListener(new TabHost.OnTabChangeListener(){
-            @Override
-            public void onTabChanged(String tabId) {
-                if (tabId.equals("tab1")) {
-                    Toast.makeText(PreviousActivity.this, "Income", Toast.LENGTH_SHORT).show();
-                }
-                if (tabId.equals("tab2")) {
-                    Toast.makeText(PreviousActivity.this, "Expense", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        monthView = (TextView)findViewById(R.id.MonthView);
+
+
+
+
+//        day = c.get(Calendar.DAY_OF_MONTH);
+
+        //check if there is a data
+
+
+        checkM.setText("08");
+        checkY.setText("2016");
+
+
+
     }
-    public void LogOut (View view){
+    public void Check(View view){
+
+        db = new MyDataBase(this);
+
+        int year = Integer.parseInt(checkY.getText().toString());
+        int month = Integer.parseInt(checkM.getText().toString());
+
+        String[] monthcal = {"January","February","March","April","May","June","July","August","September","October","November","December"};
+        monthView.setText(monthcal[month-1]);
+
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPrefs.edit();
-        editor.putString("loginUser", DEFAULT);
-        editor.putString("loginPassword", DEFAULT);
-        editor.commit();
-        Toast.makeText(this,"user log out, loading to log in page",Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
+        String loginUser = sharedPrefs.getString("loginUser", DEFAULT);
 
+        c_income = db.query_income(loginUser,Integer.toString(month),Integer.toString(year));
+        if (c_income != null && c_income.getCount() > 0) {
+            if (c_income.moveToFirst()){
+                sum_income = c_income.getInt(0);
+            }else {
+                sum_income = -1;
+            }
+        }else {
+            sum_income = -2;
+        }
+        incomeNumTxt.setText(" $ "+sum_income);
+
+        c_expense = db.query_expense(loginUser,Integer.toString(month),Integer.toString(year));
+        if (c_expense != null && c_expense.getCount() > 0) {
+            if (c_expense.moveToFirst()){
+                sum_expense = c_expense.getInt(0);
+            }else {
+                sum_expense = -1;
+            }
+        }else {
+            sum_expense = -2;
+        }
+        expenseNumTxt.setText(" $ "+sum_expense);
+
+        total = sum_income - sum_expense;
+        resultNumTxt.setText(" $ "+total);
+    }
 
 
     //button click to open income page

@@ -51,6 +51,10 @@
             android:name=".TypeEditActivity"
             android:label="@string/typeedit_page">
         </activity>
+        <activity
+            android:name=".PreviousActivity"
+            android:label="@string/previous_page">
+        </activity>
 
     </application>
 

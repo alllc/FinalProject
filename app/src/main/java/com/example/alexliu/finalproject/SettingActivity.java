@@ -26,6 +26,10 @@ public class SettingActivity extends AppCompatActivity{
         getSupportActionBar().setCustomView(R.layout.actionbar_setting);
 
     }
+    public void Previous (View view){
+        Intent intent = new Intent(this, PreviousActivity.class);
+        startActivity(intent);
+    }
 
     public void LogOut (View view){
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);

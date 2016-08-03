@@ -69,9 +69,9 @@ public class MyDataBase {
         return cursor;
     }
 
-    public Cursor query_expense(String user){
+    public Cursor query_expense(String user, String month, String year){
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT SUM(Amount) FROM PLANTSTABLE WHERE Input ='Expense' and User ='" + user + "'", null);
+        Cursor cursor = db.rawQuery("SELECT SUM(Amount) FROM PLANTSTABLE WHERE Input ='Expense' and User ='" + user + "' and Month ='"+month+"' and Year ='"+year+"'", null);
         return cursor;
     }
 }
