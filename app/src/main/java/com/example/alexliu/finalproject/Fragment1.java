@@ -45,6 +45,7 @@ public class Fragment1 extends Fragment implements View.OnTouchListener{
         loginUser = sharedPrefs.getString("loginUser", DEFAULT);
         Set<String> incometypedata = sharedPrefs.getStringSet(loginUser.toString()+"incomelist",new HashSet<String>());
         List<String> list = new ArrayList<String>(incometypedata);
+        testview = (TextView)this.getView().findViewById(R.id.tyviewtest);
 
         tyname = (EditText)tab1view.findViewById(R.id.tyname);
 
@@ -57,6 +58,35 @@ public class Fragment1 extends Fragment implements View.OnTouchListener{
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "点击了我", Toast.LENGTH_SHORT).show();
                 Intent intent= new Intent(getActivity(),AddActivity.class);
+                startActivity(intent);
+            }
+        });
+        incomelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //parent.getItemAtPosition(position) returns the value of item clicked.. use it to do whatever you wish to do
+                String item = ((TextView)view).getText().toString();
+                testview.setText(item);
+            }
+        });
+        Button deleteB=(Button)tab1view.findViewById(R.id.DeleteB);
+        deleteB.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPrefs = getActivity().getSharedPreferences("MyData", Context.MODE_PRIVATE);
+                loginUser = sharedPrefs.getString("loginUser", DEFAULT);
+                Set<String> incometypedata = sharedPrefs.getStringSet(loginUser.toString()+"incomelist",new HashSet<String>());
+                List<String> list = new ArrayList<String>(incometypedata);
+
+                Set<String> typelist1 = new HashSet<String>();
+                typelist1.addAll(list);
+                typelist1.remove(testview.getText().toString());
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putStringSet(loginUser.toString()+"incomelist", typelist1);
+                editor.commit();
+
+                Intent intent = new Intent(getActivity(), TypeEditActivity.class);
                 startActivity(intent);
             }
         });
