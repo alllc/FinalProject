@@ -29,6 +29,7 @@ public class PreviousActivity extends AppCompatActivity{
     int sum_income, sum_expense, total;
     EditText checkM, checkY;
     TextView monthView;
+    String monthinput;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +76,7 @@ public class PreviousActivity extends AppCompatActivity{
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         String loginUser = sharedPrefs.getString("loginUser", DEFAULT);
 
-        c_income = db.query_income(loginUser,Integer.toString(month),Integer.toString(year));
+        c_income = db.query_income(loginUser,checkM.getText().toString(),checkY.getText().toString());
         if (c_income != null && c_income.getCount() > 0) {
             if (c_income.moveToFirst()){
                 sum_income = c_income.getInt(0);
@@ -87,7 +88,7 @@ public class PreviousActivity extends AppCompatActivity{
         }
         incomeNumTxt.setText(" $ "+sum_income);
 
-        c_expense = db.query_expense(loginUser,Integer.toString(month),Integer.toString(year));
+        c_expense = db.query_expense(loginUser,checkM.getText().toString(),checkY.getText().toString());
         if (c_expense != null && c_expense.getCount() > 0) {
             if (c_expense.moveToFirst()){
                 sum_expense = c_expense.getInt(0);
