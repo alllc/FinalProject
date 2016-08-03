@@ -8,14 +8,12 @@
     android:id="@+id/tab01">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/MonthView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:textSize="30dp"
-        android:layout_alignParentEnd="true"
-        android:background="#66f0f6"
+        android:textSize="20dp"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorLightGrey"
         android:paddingLeft="20dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp" />
@@ -111,34 +109,31 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">>
+            android:layout_height="match_parent">
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Income"
+                android:textColor="@color/colorPrimary"
                 android:id="@+id/incomeTxtView"
-                android:layout_weight="3"
+                android:layout_weight="1"
                 android:layout_column="0" />
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_column="1"
-                android:gravity="right"
-                android:layout_weight="1" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/incomeNumTxt"
-                android:layout_column="2"
-                android:layout_weight="1"
+                android:layout_column="1"
+                android:layout_weight="2"
                 android:text="$0"
                 android:gravity="right" />
         </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/colorLightGrey"
+            android:layout_margin="10dp"/>
 
         <TableRow
             android:layout_width="match_parent"
@@ -146,94 +141,89 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/colorPrimary"
                 android:text="Expense"
                 android:id="@+id/expenseTxt"
-                android:layout_weight="3"
+                android:layout_weight="1"
                 android:layout_column="0" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/expenseNumTxt"
                 android:layout_column="1"
                 android:layout_weight="1"
                 android:text="$0"
                 android:gravity="right" />
 
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:gravity="right"
-                android:layout_column="2"
-                android:layout_weight="1" />
         </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorLightGrey"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"/>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_weight="3"
-                android:layout_column="0" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_column="1"
-                android:gravity="right"
-                android:layout_weight="1" />
-
-            <TextView
-                android:layout_width="100dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/resultNumTxt"
-                android:layout_column="2"
-                android:layout_weight="1"
+                android:layout_column="1"
+                android:layout_weight="2"
                 android:text="$0"
-                android:gravity="right" />
+                android:gravity="right"
+                android:layout_span="2" />
         </TableRow>
 
-    </TableLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Enter Month and Year"
         android:id="@+id/textView12"
         android:layout_below="@+id/tableLayout"
+        android:textColor="@color/colorPrimary"
         android:layout_alignParentStart="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/checkMonthEdit"
-        android:layout_below="@+id/textView12"
-        android:layout_alignEnd="@+id/textView12"
-        android:layout_alignParentEnd="false"
-        android:hint="MM"
-        android:maxLength="2"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/checkMonthEdit"
+                android:layout_below="@+id/textView12"
+                android:layout_alignEnd="@+id/textView12"
+                android:layout_alignParentEnd="false"
+                android:hint="MM"
+                android:maxLength="2"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/checkYearEdit"
-        android:hint="YYYY"
-        android:maxLength="4"
-        android:layout_alignTop="@+id/checkMonthEdit"
-        android:layout_toEndOf="@+id/checkMonthEdit" />
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/checkYearEdit"
+                android:hint="YYYY"
+                android:maxLength="4"
+                android:layout_alignTop="@+id/checkMonthEdit"
+                android:layout_toEndOf="@+id/checkMonthEdit" />
+
+        </LinearLayout>
+
+
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -243,11 +233,16 @@
         android:id="@+id/button2"
         android:onClick="Check"
         android:layout_below="@+id/checkYearEdit"
-        android:layout_alignEnd="@+id/checkYearEdit" />
+        android:layout_alignEnd="@+id/checkYearEdit"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"/>/>
+
     <com.github.mikephil.charting.charts.BarChart
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/spread_bar_chart"
+        android:layout_margin="20dp"
         android:layout_below="@+id/button2"
         android:layout_above="@+id/tableLayout3" />
+    </TableLayout>
 </RelativeLayout>

@@ -143,8 +143,11 @@ public class PreviousActivity extends AppCompatActivity{
         Legend mLegend = barChart.getLegend(); // 设置比例图标示
 
         mLegend.setForm(Legend.LegendForm.CIRCLE);// 样式
-        mLegend.setFormSize(6f);// 字体
-        mLegend.setTextColor(Color.BLACK);// 颜色
+        mLegend.setForm(Legend.LegendForm.CIRCLE);// 样式
+        mLegend.setFormSize(5.5f);// 字体
+
+        int tColor = getResources().getColor(R.color.colorGrey);
+        mLegend.setTextColor(tColor);// 颜色
 
 
         barChart.animateX(2500); // 立即执行的动画,x轴
@@ -166,7 +169,8 @@ public class PreviousActivity extends AppCompatActivity{
         // y轴的数据集合
         BarDataSet barDataSet = new BarDataSet(yValues, "DATA RESULT");
 
-        barDataSet.setColor(Color.rgb(114, 188, 223));
+        int myColor = getResources().getColor(R.color.colorPrimary);
+        barDataSet.setColor(myColor);
 
         ArrayList<BarDataSet> barDataSets = new ArrayList<BarDataSet>();
         barDataSets.add(barDataSet); // add the datasets
