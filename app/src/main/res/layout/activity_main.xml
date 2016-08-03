@@ -98,7 +98,8 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:id="@+id/tableLayout6">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -170,5 +171,11 @@
         </FrameLayout>
 
     </TableLayout>
+    <com.github.mikephil.charting.charts.BarChart
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/spread_bar_chart"
+        android:layout_above="@+id/tableLayout6"
+        android:layout_below="@+id/tableLayout" />
 
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,13 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.Legend;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,8 +34,9 @@ public class MainActivity extends AppCompatActivity {
     String loginUser;
     TextView monthView;
     String monthinput;
-//    int sum = c.getInt(c.getColumnIndex("sum"));
 
+    BarChart mBarChart;
+    BarData mBarData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        //getSupportActionBar().hide();
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.actionbar);
 
@@ -51,9 +59,7 @@ public class MainActivity extends AppCompatActivity {
         String[] monthcal = {"January","February","March","April","May","June","July","August","September","October","November","December"};
         monthView.setText(monthcal[month]);
 
-//        day = c.get(Calendar.DAY_OF_MONTH);
 
-        //check if there is a data
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         String loginUser = sharedPrefs.getString("loginUser", DEFAULT);
         String loginPassword = sharedPrefs.getString("loginPassword", DEFAULT);
@@ -97,7 +103,68 @@ public class MainActivity extends AppCompatActivity {
         total = sum_income - sum_expense;
         resultNumTxt.setText(" $ "+total);
 
+        mBarChart = (BarChart) findViewById(R.id.spread_bar_chart);
+        mBarData = getBarData(2, 100);
+        showBarChart(mBarChart, mBarData);
+    }
+    private void showBarChart(BarChart barChart, BarData barData) {
+//        barChart.setDrawBorders(false);  ////是否在折线图上添加边框
 
+        barChart.setDescription("");// 数据描述
+
+        // 如果没有数据的时候，会显示这个，类似ListView的EmptyView
+        barChart.setNoDataTextDescription("You need to provide data for the chart.");
+
+        barChart.setDrawGridBackground(false); // 是否显示表格颜色
+//        barChart.setGridBackgroundColor(Color.WHITE & 0x70FFFFFF); // 表格的的颜色，在这里是是给颜色设置一个透明度
+
+        barChart.setTouchEnabled(true); // 设置是否可以触摸
+
+        barChart.setDragEnabled(true);// 是否可以拖拽
+        barChart.setScaleEnabled(true);// 是否可以缩放
+
+        barChart.setPinchZoom(false);//
+
+//      barChart.setBackgroundColor();// 设置背景
+
+        barChart.setDrawBarShadow(true);
+
+        barChart.setData(barData); // 设置数据
+
+        Legend mLegend = barChart.getLegend(); // 设置比例图标示
+
+        mLegend.setForm(Legend.LegendForm.CIRCLE);// 样式
+        mLegend.setFormSize(6f);// 字体
+        mLegend.setTextColor(Color.BLACK);// 颜色
+
+
+        barChart.animateX(2500); // 立即执行的动画,x轴
+    }
+
+    private BarData getBarData(int count, float range) {
+        ArrayList<String> xValues = new ArrayList<String>();
+
+        xValues.add("Income");
+        xValues.add("Expense");
+
+        ArrayList<BarEntry> yValues = new ArrayList<BarEntry>();
+
+
+        yValues.add(new BarEntry(sum_income, 0));
+        yValues.add(new BarEntry(sum_expense, 1));
+
+
+        // y轴的数据集合
+        BarDataSet barDataSet = new BarDataSet(yValues, "DATA RESULT");
+
+        barDataSet.setColor(Color.rgb(114, 188, 223));
+
+        ArrayList<BarDataSet> barDataSets = new ArrayList<BarDataSet>();
+        barDataSets.add(barDataSet); // add the datasets
+
+        BarData barData = new BarData(xValues, barDataSets);
+
+        return barData;
     }
 
     //button click to open income page
