@@ -64,7 +64,7 @@ public class InputActivity extends AppCompatActivity implements LocationListener
     String loginUser;
     public static final String DEFAULT = "not available";
 //    String[] incometypedata;
-    //byte[] img;
+    byte[] img;
     Calendar myCalendar;
     DatePickerDialog.OnDateSetListener date;
     String MM,DD,YYYY;
@@ -222,11 +222,16 @@ public class InputActivity extends AppCompatActivity implements LocationListener
         String type = mType;
         String amount = moneyAmt.getText().toString();
         String date = moneyDate.getText().toString();
-        byte[] img = ConvertDrawableToByteArray(ivImage.getDrawable());
+//        byte[] img = ConvertDrawableToByteArray(ivImage.getDrawable());
 
         //ContentValues img = new ContentValues();
         //img.put(IMAGE, imageBytes);
+        if(ivImage.getDrawable() == null){
+            img = null;
+        }else{
+            img = ConvertDrawableToByteArray(ivImage.getDrawable());
 
+        }
         Toast.makeText(this, loginUser + input + name + type + amount + date + img, Toast.LENGTH_SHORT).show();
 
         long id = db.insertData(loginUser, input ,name, type, amount, date, MM,DD,YYYY, img);
