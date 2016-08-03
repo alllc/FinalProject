@@ -69,11 +69,9 @@ public class InputActivity extends AppCompatActivity implements LocationListener
     DatePickerDialog.OnDateSetListener date;
     String MM,DD,YYYY;
 
-    //private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     private static final int CAMERA_REQUEST = 1888;
     private Button btnSelect;
     private ImageView ivImage;
-    //private String userChoosenTask;
 
 
     @Override

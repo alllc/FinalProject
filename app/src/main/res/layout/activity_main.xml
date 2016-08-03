@@ -8,15 +8,13 @@
     android:background="#FFFFFF">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/MonthView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:textSize="30dp"
-        android:layout_alignParentEnd="true"
-        android:background="#66f0f6"
+        android:textSize="20dp"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorLightGrey"
         android:paddingLeft="20dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp" />
@@ -33,26 +31,31 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">>
+            android:layout_height="match_parent">
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Income"
+                android:textColor="@color/colorPrimary"
                 android:id="@+id/incomeTxtView"
                 android:layout_weight="1"
                 android:layout_column="0" />
 
             <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/incomeNumTxt"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/incomeNumTxt"
                 android:layout_column="1"
                 android:layout_weight="2"
                 android:text="$0"
                 android:gravity="right" />
         </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/colorLightGrey"
+            android:layout_margin="10dp"/>
 
         <TableRow
             android:layout_width="match_parent"
@@ -60,7 +63,7 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/colorPrimary"
                 android:text="Expense"
                 android:id="@+id/expenseTxt"
                 android:layout_weight="1"
@@ -69,7 +72,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/expenseNumTxt"
                 android:layout_column="1"
                 android:layout_weight="1"
@@ -78,19 +80,27 @@
 
         </TableRow>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorLightGrey"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"/>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/resultNumTxt"
-                android:layout_column="2"
+                android:layout_column="1"
                 android:layout_weight="2"
                 android:text="$0"
-                android:gravity="right" />
+                android:gravity="right"
+                android:layout_span="2" />
         </TableRow>
 
     </TableLayout>
@@ -109,7 +119,7 @@
             <LinearLayout
                 android:id="@+id/linear1"
                 android:layout_width="fill_parent"
-                android:layout_height="50dp"
+                android:layout_height="55dp"
                 android:orientation="horizontal" >
 
                 <ImageButton

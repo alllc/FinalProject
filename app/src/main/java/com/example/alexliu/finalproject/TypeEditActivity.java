@@ -37,8 +37,6 @@ public class TypeEditActivity extends FragmentActivity implements View.OnClickLi
         setContentView(R.layout.activity_typeedit);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-//        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-//        getSupportActionBar().setCustomView(R.layout.actionbar_setting);
 
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
         initView();
@@ -46,6 +44,8 @@ public class TypeEditActivity extends FragmentActivity implements View.OnClickLi
         setSelect(0);
 
     }
+
+
 
     private void initEvent() {
         t1.setOnClickListener(this);
@@ -166,4 +166,6 @@ public class TypeEditActivity extends FragmentActivity implements View.OnClickLi
         Intent intent = new Intent(this, SettingActivity.class);
         startActivity(intent);
     }
+
+
 }
