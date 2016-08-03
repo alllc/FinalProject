@@ -58,24 +58,24 @@ public class DetailActivity extends AppCompatActivity {
             cursor = db.getSelectedData(input,loginUser,monthinput,Integer.toString(year));
         }
 
-        inputTxt = (TextView)findViewById(R.id.InputType);
+        //inputTxt = (TextView)findViewById(R.id.InputType);
         nameTxt = (TextView)findViewById(R.id.Name);
         typeTxt = (TextView)findViewById(R.id.Type);
         amountTxt = (TextView)findViewById(R.id.Amount);
         dateTxt = (TextView)findViewById(R.id.Date);
 
         cursor.moveToPosition(Integer.parseInt(pos));
-        String input2 = cursor.getString(cursor.getColumnIndex(Constants.TYPE));
+        //String input2 = cursor.getString(cursor.getColumnIndex(Constants.TYPE));
 
         name = cursor.getString(cursor.getColumnIndex(Constants.NAME));
         type = cursor.getString(cursor.getColumnIndex(Constants.TYPE));
         amount = cursor.getString(cursor.getColumnIndex(Constants.AMOUNT));
         date = cursor.getString(cursor.getColumnIndex(Constants.DATE));
 
-        inputTxt.setText(input2);
+        //inputTxt.setText(input2);
         nameTxt.setText(name);
         typeTxt.setText(type);
-        amountTxt.setText(amount);
+        amountTxt.setText(" $ "+ amount);
         dateTxt.setText(date);
 
         byte[] blob = cursor.getBlob(cursor.getColumnIndex(Constants.IMAGE));
