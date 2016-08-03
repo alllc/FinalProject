@@ -27,6 +27,7 @@ public class DetailActivity extends AppCompatActivity {
     Cursor cursor ;
     ImageView image;
     String loginUser;
+    String monthinput;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,11 +49,14 @@ public class DetailActivity extends AppCompatActivity {
 
         Bundle b = intent.getExtras();
 
+
         if(b!=null){
             input = (String) b.get("INPUT");
             pos = (String) b.get("POS");
-            cursor = db.getSelectedData(input,loginUser,Integer.toString(month+1),Integer.toString(year));
+            monthinput = (String) b.get("MON");
+            cursor = db.getSelectedData(input,loginUser,monthinput,Integer.toString(year));
         }
+
         inputTxt = (TextView)findViewById(R.id.InputType);
         nameTxt = (TextView)findViewById(R.id.Name);
         typeTxt = (TextView)findViewById(R.id.Type);

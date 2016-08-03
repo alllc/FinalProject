@@ -28,6 +28,7 @@ public class ExpenseActivity extends AppCompatActivity implements AdapterView.On
     String name,type,amount,date;
     Cursor cursor ;
     TextView monthView;
+    String monthinput;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,9 +53,15 @@ public class ExpenseActivity extends AppCompatActivity implements AdapterView.On
 
         Intent intent = getIntent();
 
+        if(month <= 9){
+            monthinput = "0" + Integer.toString(month+1);
+        }else{
+            monthinput = Integer.toString(month+1);
+        }
+
         if(intent. hasExtra("query")){
             queryResult = intent.getStringExtra("query");
-            cursor = db.getSelectedData(queryResult,loginUser,Integer.toString(month+1),Integer.toString(year));
+            cursor = db.getSelectedData(queryResult,loginUser,monthinput,Integer.toString(year));
         } else {
             cursor = db.getData();
         }
@@ -78,12 +85,9 @@ public class ExpenseActivity extends AppCompatActivity implements AdapterView.On
         amount = cursor.getString(cursor.getColumnIndex(Constants.AMOUNT));
         date = cursor.getString(cursor.getColumnIndex(Constants.DATE));
         intent.putExtra("INPUT",queryResult);
-//        intent.putExtra("NAME", name);
-//        intent.putExtra("TYPE", type);
-//        intent.putExtra("AMOUNT", amount);
-//        intent.putExtra("DATE", date);
         String pos = Integer.toString(position);
         intent.putExtra("POS",pos);
+        intent.putExtra("MON",monthinput);
         startActivity(intent);
     }
 

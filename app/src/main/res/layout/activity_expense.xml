@@ -103,6 +103,7 @@
         android:id="@+id/listView"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/tableLayout2"
-        android:padding="20dp"
-        android:layout_below="@+id/MonthView" />
+        android:layout_below="@+id/MonthView"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" />
 </RelativeLayout>

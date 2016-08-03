@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         }
         incomeNumTxt.setText(" $ "+sum_income);
 
-        c_expense = db.query_expense(loginUser,Integer.toString(month+1),Integer.toString(year));
+        c_expense = db.query_expense(loginUser,monthinput,Integer.toString(year));
         if (c_expense != null && c_expense.getCount() > 0) {
             if (c_expense.moveToFirst()){
                 sum_expense = c_expense.getInt(0);
