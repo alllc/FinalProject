@@ -124,7 +124,7 @@ public class InputActivity extends AppCompatActivity implements LocationListener
             }
         });
 
-        textView = (TextView)findViewById(R.id.textView6);
+        //textView = (TextView)findViewById(R.id.textView6);
         db = new MyDataBase(this);
 
 //        incometypedata = new String[]{"Interest", "Payment", "Others"};

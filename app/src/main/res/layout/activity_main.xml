@@ -119,7 +119,7 @@
             <LinearLayout
                 android:id="@+id/linear1"
                 android:layout_width="fill_parent"
-                android:layout_height="55dp"
+                android:layout_height="50dp"
                 android:orientation="horizontal" >
 
                 <ImageButton
