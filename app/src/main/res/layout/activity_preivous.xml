@@ -209,7 +209,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Enter Month and Year"
         android:id="@+id/textView12"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/tableLayout"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -230,10 +230,10 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/checkYearEdit"
-        android:layout_below="@+id/checkMonthEdit"
-        android:layout_alignEnd="@+id/checkMonthEdit"
         android:hint="YYYY"
-        android:maxLength="4"/>
+        android:maxLength="4"
+        android:layout_alignTop="@+id/checkMonthEdit"
+        android:layout_toEndOf="@+id/checkMonthEdit" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -241,8 +241,13 @@
         android:layout_height="wrap_content"
         android:text="Submit"
         android:id="@+id/button2"
+        android:onClick="Check"
         android:layout_below="@+id/checkYearEdit"
-        android:layout_alignParentStart="true"
-        android:onClick="Check" />
-
+        android:layout_alignEnd="@+id/checkYearEdit" />
+    <com.github.mikephil.charting.charts.BarChart
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/spread_bar_chart"
+        android:layout_below="@+id/button2"
+        android:layout_above="@+id/tableLayout3" />
 </RelativeLayout>

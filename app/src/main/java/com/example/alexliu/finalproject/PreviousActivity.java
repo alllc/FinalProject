@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,13 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.Legend;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -26,10 +34,12 @@ public class PreviousActivity extends AppCompatActivity{
     TextView incomeNumTxt, expenseNumTxt, resultNumTxt;
     MyDataBase db;
     Cursor c_income, c_expense;
-    double sum_income, sum_expense, total;
+    float sum_income, sum_expense, total;
     EditText checkM, checkY;
     TextView monthView;
     String monthinput;
+    BarChart mBarChart;
+    BarData mBarData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +89,7 @@ public class PreviousActivity extends AppCompatActivity{
         c_income = db.query_income(loginUser,checkM.getText().toString(),checkY.getText().toString());
         if (c_income != null && c_income.getCount() > 0) {
             if (c_income.moveToFirst()){
-                sum_income = c_income.getDouble(0);
+                sum_income = c_income.getFloat(0);
             }else {
                 sum_income = -1;
             }
@@ -91,7 +101,7 @@ public class PreviousActivity extends AppCompatActivity{
         c_expense = db.query_expense(loginUser,checkM.getText().toString(),checkY.getText().toString());
         if (c_expense != null && c_expense.getCount() > 0) {
             if (c_expense.moveToFirst()){
-                sum_expense = c_expense.getDouble(0);
+                sum_expense = c_expense.getFloat(0);
             }else {
                 sum_expense = -1;
             }
@@ -102,8 +112,69 @@ public class PreviousActivity extends AppCompatActivity{
 
         total = sum_income - sum_expense;
         resultNumTxt.setText(" $ "+total);
+        mBarChart = (BarChart) findViewById(R.id.spread_bar_chart);
+        mBarData = getBarData(2, 100);
+        showBarChart(mBarChart, mBarData);
+    }
+    private void showBarChart(BarChart barChart, BarData barData) {
+//        barChart.setDrawBorders(false);  ////是否在折线图上添加边框
+
+        barChart.setDescription("");// 数据描述
+
+        // 如果没有数据的时候，会显示这个，类似ListView的EmptyView
+        barChart.setNoDataTextDescription("You need to provide data for the chart.");
+
+        barChart.setDrawGridBackground(false); // 是否显示表格颜色
+//        barChart.setGridBackgroundColor(Color.WHITE & 0x70FFFFFF); // 表格的的颜色，在这里是是给颜色设置一个透明度
+
+        barChart.setTouchEnabled(true); // 设置是否可以触摸
+
+        barChart.setDragEnabled(true);// 是否可以拖拽
+        barChart.setScaleEnabled(true);// 是否可以缩放
+
+        barChart.setPinchZoom(false);//
+
+//      barChart.setBackgroundColor();// 设置背景
+
+        barChart.setDrawBarShadow(true);
+
+        barChart.setData(barData); // 设置数据
+
+        Legend mLegend = barChart.getLegend(); // 设置比例图标示
+
+        mLegend.setForm(Legend.LegendForm.CIRCLE);// 样式
+        mLegend.setFormSize(6f);// 字体
+        mLegend.setTextColor(Color.BLACK);// 颜色
+
+
+        barChart.animateX(2500); // 立即执行的动画,x轴
     }
 
+    private BarData getBarData(int count, float range) {
+        ArrayList<String> xValues = new ArrayList<String>();
+
+        xValues.add("Income");
+        xValues.add("Expense");
+
+        ArrayList<BarEntry> yValues = new ArrayList<BarEntry>();
+
+
+        yValues.add(new BarEntry(sum_income, 0));
+        yValues.add(new BarEntry(sum_expense, 1));
+
+
+        // y轴的数据集合
+        BarDataSet barDataSet = new BarDataSet(yValues, "DATA RESULT");
+
+        barDataSet.setColor(Color.rgb(114, 188, 223));
+
+        ArrayList<BarDataSet> barDataSets = new ArrayList<BarDataSet>();
+        barDataSets.add(barDataSet); // add the datasets
+
+        BarData barData = new BarData(xValues, barDataSets);
+
+        return barData;
+    }
 
     //button click to open income page
     public void incomePage(View view){
