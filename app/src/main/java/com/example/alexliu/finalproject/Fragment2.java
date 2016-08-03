@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -25,6 +26,8 @@ public class Fragment2 extends Fragment {
     ListView incomelist;
     TextView testview;
     String loginUser;
+    List<String> list;
+    int pos;
     public static final String DEFAULT = "not available";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
@@ -37,8 +40,8 @@ public class Fragment2 extends Fragment {
         SharedPreferences sharedPrefs = this.getActivity().getSharedPreferences("MyData", Context.MODE_PRIVATE);
         loginUser = sharedPrefs.getString("loginUser", DEFAULT);
         Set<String> expensetypedata = sharedPrefs.getStringSet(loginUser.toString()+"expenselist",new HashSet<String>());
-        List<String> list = new ArrayList<String>(expensetypedata);
-
+        list = new ArrayList<String>(expensetypedata);
+        testview = (TextView)this.getView().findViewById(R.id.tyviewtest);
 
         incomelist.setAdapter(new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1,list));
         Button button=(Button)tab2view.findViewById(R.id.button5);
@@ -51,5 +54,37 @@ public class Fragment2 extends Fragment {
                 startActivity(intent);
             }
         });
+        incomelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //parent.getItemAtPosition(position) returns the value of item clicked.. use it to do whatever you wish to do
+                String item = ((TextView)view).getText().toString();
+                testview.setText(item);
+                pos = position;
+            }
+        });
+        Button deleteB=(Button)tab2view.findViewById(R.id.button6);
+        deleteB.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPrefs = getActivity().getSharedPreferences("MyData", Context.MODE_PRIVATE);
+                loginUser = sharedPrefs.getString("loginUser", DEFAULT);
+                Set<String> expensetypedata = sharedPrefs.getStringSet(loginUser.toString()+"expenselist",new HashSet<String>());
+                List<String> list = new ArrayList<String>(expensetypedata);
+
+                Set<String> typelist1 = new HashSet<String>();
+                typelist1.addAll(list);
+                typelist1.remove(testview.getText().toString());
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putStringSet(loginUser.toString()+"expenselist", typelist1);
+                editor.commit();
+
+                Intent intent = new Intent(getActivity(), TypeEditActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
+
 }

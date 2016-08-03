@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +25,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Fragment1 extends Fragment {
+public class Fragment1 extends Fragment implements View.OnTouchListener{
     private View tab1view;
     ListView incomelist;
     TextView testview;
@@ -59,7 +60,31 @@ public class Fragment1 extends Fragment {
                 startActivity(intent);
             }
         });
+//        incomelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                //parent.getItemAtPosition(position) returns the value of item clicked.. use it to do whatever you wish to do
+//            }
+//        });
+//        incomelist.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//                    ClipData data = ClipData.newPlainText("", "");
+//                    View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
+//
+//                    v.startDrag(data, shadowBuilder, v, 0);
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            }
+//        });
     }
 
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return false;
+    }
 }
