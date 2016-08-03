@@ -45,8 +45,8 @@ public class MyDataBase {
     {
         SQLiteDatabase db = helper.getWritableDatabase();
 
-        String[] columns = {Constants.UID, Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
-        Cursor cursor = db.query(Constants.TABLE_NAME, columns, null, null, null, null, null);
+        String[] columns = {Constants.UID, Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE, Constants.IMAGE};
+        Cursor cursor = db.query(Constants.TABLE_NAME, columns, null, null, null, null, null, null);
         return cursor;
     }
 
@@ -55,11 +55,11 @@ public class MyDataBase {
     {
         //select plants from database of type 'herb'
         SQLiteDatabase db = helper.getWritableDatabase();
-        String[] columns = {Constants.UID, Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE};
+        String[] columns = {Constants.UID, Constants.NAME, Constants.TYPE, Constants.AMOUNT, Constants.DATE, Constants.IMAGE};
 
 //        String selection = Constants.INPUT + "='" +input+ "'" ;  //Constants.TYPE = 'type'
         String selection = "Input ='" + input +"' and User ='" +user+"' and Month ='" + month +"' and Year ='"+ year + "'" ;
-        Cursor cursor = db.query(Constants.TABLE_NAME, columns, selection, null, null, null, null);
+        Cursor cursor = db.query(Constants.TABLE_NAME, columns, selection, null, null, null, null, null);
         return cursor;
     }
 

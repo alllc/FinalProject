@@ -1,32 +1,48 @@
 package com.example.alexliu.finalproject;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,10 +64,18 @@ public class InputActivity extends AppCompatActivity implements LocationListener
     String loginUser;
     public static final String DEFAULT = "not available";
 //    String[] incometypedata;
-    byte[] img;
+    //byte[] img;
     Calendar myCalendar;
     DatePickerDialog.OnDateSetListener date;
     String MM,DD,YYYY;
+
+    //private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
+    private static final int CAMERA_REQUEST = 1888;
+    private Button btnSelect;
+    private ImageView ivImage;
+    //private String userChoosenTask;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +83,10 @@ public class InputActivity extends AppCompatActivity implements LocationListener
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.actionbar_note);
+
+        btnSelect = (Button) findViewById(R.id.imgButton);
+        ivImage = (ImageView) findViewById(R.id.preview);
+
 
         SharedPreferences sharedPrefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         loginUser = sharedPrefs.getString("loginUser", DEFAULT);
@@ -144,7 +172,7 @@ public class InputActivity extends AppCompatActivity implements LocationListener
         moneyType.setOnItemSelectedListener(new SpinnerXMLSelectedListener());
         moneyType.setVisibility(View.VISIBLE);
 
-        img = image(R.drawable.homegrey1);//测试用图。 应该是在这里改成相机的
+        //img = image(R.drawable.homegrey1);//测试用图。 应该是在这里改成相机的
 
         //gps
 
@@ -178,8 +206,39 @@ public class InputActivity extends AppCompatActivity implements LocationListener
         }
 
     }
+    public void takeImageFromCamera(View view) {
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, CAMERA_REQUEST);
+    }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+            Bitmap mphoto = (Bitmap) data.getExtras().get("data");
+            ivImage.setImageBitmap(mphoto);
+        }
+    }
 
+    public static byte[] getImageBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
+    }
+
+    public static Bitmap getImage(byte[] image) {
+        return BitmapFactory.decodeByteArray(image, 0, image.length);
+    }
+
+    public static byte[] getBytes(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
+
+        int len = 0;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
+        return byteBuffer.toByteArray();
+    }
 
     public void submitButton (View view)
     {
@@ -188,16 +247,17 @@ public class InputActivity extends AppCompatActivity implements LocationListener
         String type = mType;
         String amount = moneyAmt.getText().toString();
         String date = moneyDate.getText().toString();
-        Toast.makeText(this, loginUser + input + name + type + amount + date, Toast.LENGTH_SHORT).show();
+        byte[] img = ConvertDrawableToByteArray(ivImage.getDrawable());
 
+        //ContentValues img = new ContentValues();
+        //img.put(IMAGE, imageBytes);
+
+        Toast.makeText(this, loginUser + input + name + type + amount + date + img, Toast.LENGTH_SHORT).show();
 
         long id = db.insertData(loginUser, input ,name, type, amount, date, MM,DD,YYYY, img);
-        if (id < 0)
-        {
+        if (id < 0) {
             Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
+        } else {
             Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
@@ -208,34 +268,36 @@ public class InputActivity extends AppCompatActivity implements LocationListener
         moneyDate.setText("");
     }
     //图片
-    public byte[] image(int id)
-    {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Bitmap bitmap = ((BitmapDrawable) getResources().getDrawable(id)).getBitmap();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        return baos.toByteArray();
+    //public byte[] image(int id) {
+    //    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    //    Bitmap bitmap = ((BitmapDrawable) getResources().getDrawable(id)).getBitmap();
+    //    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+    //    return baos.toByteArray();
+    //}
+    public static byte[] ConvertDrawableToByteArray(Drawable drawableResource) {
 
+        Bitmap imageBitmap = ((BitmapDrawable) drawableResource).getBitmap();
+        ByteArrayOutputStream imageByteStream = new ByteArrayOutputStream();
+        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, imageByteStream);
+        byte[] imageByteData = imageByteStream.toByteArray();
+        return imageByteData;
     }
 
     //gps
     @Override
     public void onLocationChanged(Location location) {
-
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-
     }
 
     @Override
     public void onProviderEnabled(String provider) {
-
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-
     }
 
 
