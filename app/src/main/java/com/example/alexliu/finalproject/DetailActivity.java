@@ -66,14 +66,14 @@ public class DetailActivity extends AppCompatActivity {
         dateTxt = (TextView)findViewById(R.id.Date);
 
         cursor.moveToPosition(Integer.parseInt(pos));
-        String input2 = cursor.getString(cursor.getColumnIndex(Constants.INPUT));
+//        String input2 = cursor.getString(cursor.getColumnIndex(Constants.INPUT));
 
         name = cursor.getString(cursor.getColumnIndex(Constants.NAME));
         type = cursor.getString(cursor.getColumnIndex(Constants.TYPE));
         amount = cursor.getString(cursor.getColumnIndex(Constants.AMOUNT));
         date = cursor.getString(cursor.getColumnIndex(Constants.DATE));
 
-        inputTxt.setText(input2);
+        inputTxt.setText(input);
         nameTxt.setText(name);
         typeTxt.setText(type);
         amountTxt.setText(" $ "+ amount);
